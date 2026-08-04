@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.2.0 (2026-08-03)
+
 - **Changed:** Documented pull-based `ht-pipe` destinations, root-document collection, source removal, and rendered-element deduplication.
 - **Changed:** Required ordered component and layout style blocks so layout-specific CSS overrides component defaults through the normal cascade.
 - **Changed:** Allowed full-page and component-first layout development workflows to converge on the same reusable fragment structure.
