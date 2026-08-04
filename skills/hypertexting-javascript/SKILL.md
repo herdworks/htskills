@@ -40,15 +40,11 @@ Use browser JavaScript to progressively enhance a useful pre-rendered HTML compo
 
 - Call a serverless function or other backend API only from the component that needs it.
 - Treat API results, loading states, and failures as enhancements; do not replace the component's baseline content or navigation.
-- Use `ht-pipe` with `as js` or `as javascript` only when fragment-owned inline code must compose into a known layout destination. Otherwise, use a static browser script asset.
-
-## Known issues
-
-- `ht-pipe` does not deduplicate piped JavaScript. Repeated fragment inclusion can emit repeated script text; treat that output as expected behavior.
+- Use destination-side `ht-pipe='from "script.component" as js'` only when fragment-owned inline code must compose into a known layout destination; mark each source with `class='component'`. Otherwise, use a static browser script asset.
 
 ## Tools
 
-- `hyperctl dev render` verifies the pre-rendered HTML baseline in a site context.
+- Use `hyperctl dev render` with a rootless component fragment and fixture JSON to verify its pre-rendered HTML baseline; use a full document render to verify composition before browser testing.
 - Use browser developer tools to verify the enhanced interaction and the no-JavaScript baseline.
 
 ## References
@@ -56,4 +52,5 @@ Use browser JavaScript to progressively enhance a useful pre-rendered HTML compo
 - Consult [runtime-boundaries.md](references/runtime-boundaries.md) as needed to choose HTML, CSS, browser JavaScript, a build-time plugin, or an API.
 - Consult [web-components.md](references/web-components.md) as needed for the event-router pattern and component rules.
 - Consult `hyperctl agent skill describe hypertexting-html`, `hyperctl agent skill describe hypertexting-assets`, or `hyperctl agent skill describe hypertexting-plugins` as needed for the owning contract.
+- Consult `hyperctl agent skill describe hypertexting-layouts` for the `ht-pipe` contract and examples.
 - Consult the [HTML Web Components pattern](https://adactio.com/journal/20618) or [ht-pipe reference](https://hypertemplates.net/docs/reference/core/directives/ht-pipe/) only if the bundled references do not answer the question.

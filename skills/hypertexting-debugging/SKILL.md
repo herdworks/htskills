@@ -12,7 +12,7 @@ Use HyperTexting's declarative commands and directives before writing diagnostic
 
 ## Workflow
 
-1. Reproduce the problem with the relevant `hyperctl` command in a site context.
+1. Reproduce an isolated component problem with `hyperctl dev render` and fixture JSON, or reproduce a composition problem in a site context.
 2. Use `ht-debug` to inspect the affected element or complete template variable.
 3. Render again and inspect the output and debug log.
 4. Check the owning skill's known issues before investigating expected behavior.
@@ -30,7 +30,7 @@ Use HyperTexting's declarative commands and directives before writing diagnostic
 
 ## Tools
 
-- `hyperctl dev render` renders a site in its configured context.
+- `hyperctl dev render` renders explicit documents or rootless fragments with fixture data; use a site context when the problem depends on composition or site data.
 
 ## References
 

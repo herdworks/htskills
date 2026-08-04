@@ -41,7 +41,7 @@ Author the HTML first. HyperTexting pre-renders static HTML at build time throug
 
 ## Tools
 
-- `hyperctl dev render` verifies rendered markup in a site context.
+- Use `hyperctl dev render` with a rootless component fragment and fixture JSON to verify rendered markup without creating a page layout first.
 
 ## References
 

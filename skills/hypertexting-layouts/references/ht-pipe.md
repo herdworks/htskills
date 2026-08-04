@@ -2,30 +2,32 @@
 
 ## Contract
 
-`ht-pipe` moves an element or appends its text to the first matching destination in the document. Use it when a layout cannot place content at its destination directly. See [expressions.md](expressions.md) for grammar terminology.
+`ht-pipe` collects matching source elements into the destination that owns the directive. Use it when a layout needs to assemble fragment-owned elements or text in one location. It runs once on the final root document, after `ht-block` and before `ht-base`; it does not run while rendering fragments. See [expressions.md](expressions.md) for grammar terminology.
 
 ## Syntax
 
 ```html
-<style ht-pipe='to "style#components" as css'>...</style>
+<style id='components' ht-pipe='from "style.component" as css'></style>
 ```
 
-- The selector is a required quoted literal: `to "<selector>"`.
-- Omit `as <type>` to move the element. `text`, `css`, `js`, and `javascript` append text instead.
+- Put `ht-pipe` on the destination. The selector is a required quoted literal: `from "<source selector>"`.
+- Mark source elements so they match the selector. `style.component` with `<style class='component'>` is the standard component-style convention, but destinations may use a different or broader source selector when needed.
+- Omit `as <type>` to append matching source elements. `text`, `css`, `js`, and `javascript` append their text instead.
 - Template variables in the selector remain literal text; selectors are never rendered.
-- Repeated directives are source-ordered fallbacks: the first one with a matching destination wins.
+- Repeated directives on one destination are processed in source order. Matching sources are collected in document order and removed from their original parents.
+- `ht-pipe` excludes its destination from the source set and deduplicates matching source elements by exact rendered outer-HTML bytes before appending elements or text.
 
 ## Examples
 
 ```html
-<style ht-pipe='to "style#components" as css'>
+<!-- layout -->
+<style id='components' ht-pipe='from "style.component" as css'></style>
+
+<!-- fragment -->
+<style class='component'>
   status-pill { display: inline-block; }
 </style>
 ```
-
-## Known issues
-
-`ht-pipe` does not deduplicate piped content. Repeated inclusion can emit repeated CSS or text; treat that output as expected behavior.
 
 ## Specification
 

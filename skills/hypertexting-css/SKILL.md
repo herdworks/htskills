@@ -28,17 +28,27 @@ Build light-DOM styles from shared foundations and fragment-owned component CSS.
 
 ### Colocate component-specific CSS
 
-- Always add `<style id='components'></style>` before `<style id='layout'></style>` in each layout head so layout rules can override component defaults.
+- Include these two style elements in every layout `<head>`, with `style#components` before `style#layout`:
+
+  ```html
+  <style id='components' ht-pipe='from "style.component" as css'></style>
+  <style id='layout'>
+    /* layout-specific styles go here */
+  </style>
+  ```
+
+- Add any layout-specific component styles to `style#layout`. `ht-pipe` will collect all matching component styles in `style#components`, allowing `style#layout` declarations with otherwise equal cascade weights to benefit from source order precedence (the last matching declaration wins). This predictable source ordering often reduces the need for advanced `@layer` rules or brute-force `!important` declarations.
+- Treat `from "style.component"` as the default source-selector convention. Change or expand the `ht-pipe` selector when the layout needs to collect a different set of component styles.
 - Style custom elements and their custom attributes directly. Prefer `article-card`, `article-card[featured]`, and `site-menu[collapsed]` over class-based selectors.
 - Create only the few CSS classes a website genuinely needs; most HyperTexting websites need few or none.
-- Put `<style ht-pipe='to "style#components" as css'></style>` in the fragment that owns the component markup.
+- Put `<style class='component'></style>` in the fragment that owns the component markup.
 - Keep the component's default and trailing `@media` rules in that fragment.
 - Do not move fragment-owned component styles into a generic static `style.css` during a layout refactor.
 - Reserve static CSS files for shared foundations: reset, variables, grid, colors, and genuinely site-wide rules.
 
-### Apply layout-specific overrides
+### Add layout-specific component styles
 
-- Put layout-specific placement, spacing, and contextual overrides in the layout's `<style id='layout'></style>` block, after `style#components`.
+- Put layout-specific component styles, including placement, spacing, and contextual styling, in the layout's `<style id='layout'></style>` block, after `style#components`.
 - Do not create a fragment variant solely for layout-specific styling.
 - Create a fragment variant only when its markup, data contract, or reusable behavior differs.
 
@@ -46,15 +56,12 @@ Build light-DOM styles from shared foundations and fragment-owned component CSS.
 
 - Cache-bust static CSS with template variables: `<link ht-apply rel='stylesheet' href='/css/reset.css?version=${ site.version, build.id }'>`.
 
-## Known issues
-
-- `ht-pipe` does not deduplicate piped CSS. Repeated inclusion can emit repeated component styles; treat that output as expected behavior.
-
 ## Tools
 
-- `hyperctl dev render` renders the layout for cascade and responsive-behavior checks.
+- Use `hyperctl dev render` with a rootless fragment and fixture JSON to verify component markup and styles during development; render the composed layout to verify the final cascade and responsive behavior.
 
 ## References
 
-- [ht-pipe](https://hypertemplates.net/docs/reference/core/directives/ht-pipe/)
+- Consult `hyperctl agent skill describe hypertexting-layouts` for the `ht-pipe` contract and examples.
+- Consult the [ht-pipe reference](https://hypertemplates.net/docs/reference/core/directives/ht-pipe/) only if the bundled layout skill does not answer the question.
 - [CSS Web Components for Marketing Sites](https://hawkticehurst.com/2024/11/css-web-components-for-marketing-sites/)

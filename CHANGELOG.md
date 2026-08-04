@@ -5,6 +5,12 @@ this file.
 
 ## Unreleased
 
+- **Changed:** Documented pull-based `ht-pipe` destinations, root-document collection, source removal, and rendered-element deduplication.
+- **Changed:** Required ordered component and layout style blocks so layout-specific CSS overrides component defaults through the normal cascade.
+- **Changed:** Allowed full-page and component-first layout development workflows to converge on the same reusable fragment structure.
+- **Added:** Documented rootless component rendering with `hyperctl dev render` and fixture JSON data.
+- **Changed:** Aligned HTML, CSS, JavaScript, debugging, and plugin verification guidance with component rendering and full-site build boundaries.
+
 ## v0.1.0 (2026-08-03)
 
 Initial implementation of the `htskills` package.

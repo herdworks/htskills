@@ -8,23 +8,24 @@ version: 1
 
 ## Overview
 
-Compose complete HTML documents from reusable fragments. Define each fragment's data contract before choosing the directive that renders it.
+Compose complete HTML documents from reusable fragments. Let the source design determine whether authoring begins with a page layout or component fragment; both paths must converge on layouts composed from fragments with clear data contracts.
 
 ## Workflow
 
-1. Model the document structure and extract reusable fragments.
-2. Define the data each fragment needs and choose its scope.
-3. Select directives that match the fragment and data contracts.
-4. Render the layout in a site context and verify the output.
+1. Let the source design dictate the authoring workflow.
+2. Build the page or component until its data contract and reuse opportunities are clear.
+3. Extract reusable fragments and define their data contracts.
+4. Select directives that match the resulting layout and fragment contracts.
+5. Render the layout in a site context and verify the output.
 
 ## Instructions
 
 ### Compose layouts
 
 - Model websites as distinct page types, with one layout per type.
-- Use `ht-include` for common page sections and inline only page-specific content.
-- Start every layout with a `<header>` element that includes the header fragment, and end it with a `<footer>` element that includes the footer fragment.
-- Extract a fragment after a temporary design proves reusable.
+- Use the source design to choose an entrypoint. For full-page mockups, begin with a monolithic layout; for component-level designs, begin with fragments.
+- Follow the chosen entrypoint until the data contract and reuse opportunities are clear, then converge on the required outcome: reusable fragments with explicit data contracts, composed into layouts with `ht-include`.
+- Do not split a layout merely to anticipate reuse.
 
 ### Select directives
 
@@ -38,25 +39,23 @@ Compose complete HTML documents from reusable fragments. Define each fragment's 
 
 - Organize `<body>` into top-level `<header>`, `<main>`, and `<footer>`.
 - Build page regions as `<section>` elements and use `<article>` for article content.
-- Make each substantive section its own fragment; do not accumulate a whole homepage in one layout file.
-- Inline a section only when it is page-specific, simple, and primarily composes other fragments.
+- Once a section has a clear data contract or reuse opportunity, make it a fragment; do not retain established reusable sections in one growing layout file.
+- Keep a section inline while its design or data contract is still evolving, or when it remains page-specific and simple.
 - When two or more top-level section fragments reuse a component, make that component a fragment too.
 - Compare extracted section fragments for repeated HTML blocks and component styles; extract those into smaller shared fragments.
 - Use `hypertexting-html` to choose semantic elements, custom elements, component attributes, and styling hooks.
 - Colocate a fragment’s component styles in that fragment’s HTML file.
+- Include the required `style#components` collector and later `style#layout` block in every layout head; consult `hyperctl agent skill describe hypertexting-css` for their contract and cascade guidance.
 
 ### Verify rendered output
 
+- Use `hyperctl dev render --data <fixture>.json --layout <fragment>.html` to develop a rootless component against its fixture data. It renders only the fragment nodes and does not require page data or inject built-ins.
 - Test fragment composition inside a site directory with a throwaway page.
 - Validate rendered output as well as build logs, especially when debugging bindings.
 
-## Known issues
-
-- `ht-pipe` does not deduplicate piped content. Repeated inclusion can emit repeated CSS or text; treat that output as expected behavior.
-
 ## Tools
 
-- `hyperctl dev render` renders within a site and theme context; it is not a standalone fragment sandbox and rejects absolute layout paths.
+- `hyperctl dev render` renders either an explicit HTML document or a rootless fragment. Pass relative layout paths; absolute layout paths are rejected.
 
 ## References
 
