@@ -1,7 +1,7 @@
 ---
 name: hypertexting-layouts
 description: HTML templating skill.
-version: 1
+version: "2026-08"
 ---
 
 # HyperTexting layouts

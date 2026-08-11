@@ -24,7 +24,7 @@ var FS embed.FS
 type Skill struct {
 	Name        string `yaml:"name"`
 	Description string `yaml:"description"`
-	Version     *int   `yaml:"version"`
+	Version     string `yaml:"version"`
 }
 
 // Parse reads and validates a skill's YAML frontmatter.
@@ -47,8 +47,8 @@ func Parse(content []byte) (skill Skill, err error) {
 	if skill.Description == "" {
 		return skill, fmt.Errorf("skill frontmatter is missing description")
 	}
-	if skill.Version != nil && *skill.Version < 0 {
-		return skill, fmt.Errorf("skill %q has invalid version %d", skill.Name, *skill.Version)
+	if skill.Version == "" {
+		return skill, fmt.Errorf("skill %q is unversioned", skill.Name)
 	}
 	return skill, nil
 }
@@ -74,9 +74,6 @@ func Skills() ([]Skill, error) {
 		}
 		if skill.Name != entry.Name() {
 			return nil, fmt.Errorf("bundled skill directory %q does not match frontmatter name %q", entry.Name(), skill.Name)
-		}
-		if skill.Version == nil {
-			return nil, fmt.Errorf("bundled skill %q is unversioned", skill.Name)
 		}
 		skills = append(skills, skill)
 	}

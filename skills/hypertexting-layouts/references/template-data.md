@@ -9,6 +9,11 @@ Template data is the render context available to a layout or fragment. The `hype
 - Use `${ ... }` template variables to read `site`, `page`, `theme`, and named data namespaces.
 - Use the current page's custom properties through `page`, such as `${ page.hero.title }`; use `site` for website-wide values.
 - Use a template-variable fallback when more than one context can supply a value: `${ page.title, site.title, "Untitled" }`.
+- Use `page.feeds.<alias>.url` for a selected feed's Atom URL and `page.feeds.<alias>.items` for its page-item views. The page author selects each alias with `page.feeds`.
+- Use `site.pages` for the complete build-visible page catalog. It remains complete during an incremental build, so layouts and computed data can derive navigation, archives, and indexes from one stable catalog.
+- Status pages are present in `site.pages`. The default status layout resolves
+  its redirect from `page.redirect`, then `site.config.status_redirect`, then
+  `/`; a custom status layout may render ordinary content.
 - See [variables.md](variables.md) for variable syntax and [hypertexting-data](../../hypertexting-data/SKILL.md) when creating or restructuring source data.
 
 ## Directive scope

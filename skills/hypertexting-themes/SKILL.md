@@ -1,7 +1,7 @@
 ---
 name: hypertexting-themes
 description: Website theme management skill.
-version: 1
+version: "2026-08"
 ---
 
 # HyperTexting themes

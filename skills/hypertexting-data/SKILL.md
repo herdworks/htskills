@@ -1,7 +1,7 @@
 ---
 name: hypertexting-data
 description: Website data management skill.
-version: 1
+version: "2026-08"
 ---
 
 # HyperTexting data
@@ -24,6 +24,8 @@ HyperTexting is a data-driven content management system and static site generato
 
 - Create a `site.yaml`, `site.yml`, or `site.json` configuration file.
 - Treat the website as a `website` object; consult `hyperctl agent schema describe website` as needed.
+- Define named Atom feeds in `site.feeds`. Each feed selects pages with `include` and `exclude` selectors, and may set ordered `sort` rules and an `html_url` alternate.
+- Consult [feeds.md](references/feeds.md) before defining a feed identifier or selector.
 
 ### Page data
 
@@ -33,6 +35,8 @@ HyperTexting is a data-driven content management system and static site generato
 - Use `index.html` or `page.html` instead of a page data file for a pre-rendered static page.
 - Prefer YAML or JSON for structured content, such as landing pages; prefer Markdown with YAML front matter for prose, such as blog posts.
 - Put page-specific structured data, such as `hero` or `features` blocks, directly in the corresponding page data file.
+- Set `visibility` to control whether the page appears on the website, in feeds, and in builds. Set `spec.visibility` on a content type when the content type owns that visibility choice.
+- Use `feeds.<alias>` to expose one configured site feed (`source`) or one automatic tag feed (`tag`) to this page's template. Consult [feeds.md](references/feeds.md) and [visibility.md](references/visibility.md) for the authored-data contracts.
 
 **Example:** For a complex home page that is not primarily prose, use `content/index.yaml` or `content/index.json` with custom properties. Do not split its data between `content/index.md` and a separate `data/homepage.yaml` namespace.
 
@@ -63,6 +67,8 @@ HyperTexting is a data-driven content management system and static site generato
 ## References
 
 - Consult [namespaces.md](references/namespaces.md) as needed for namespace paths, nested files, and collisions.
+- Consult [feeds.md](references/feeds.md) as needed for website feeds and page feed references.
+- Consult [visibility.md](references/visibility.md) as needed for page and content-type visibility.
 - [templating](https://hypertemplates.net/docs/#introduction-to-templating)
 - [data](https://hypertemplates.net/docs/reference/core/data/)
 - [data sources](https://hypertemplates.net/docs/reference/core/data/#template-data-sources)

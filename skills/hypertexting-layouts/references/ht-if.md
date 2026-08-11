@@ -7,17 +7,17 @@
 ## Syntax
 
 ```html
-<article ht-if='${ page.published }'>...</article>
+<article ht-if='${ page.title }'>...</article>
 ```
 
 ### Supported conditions
 
-- **Presence:** `${ page.published }`
-- **Negated presence / unary negation:** `!${ page.draft }`
-- **Binary equality and inequality:** `${ page.kind } == "article"` or `${ page.kind } != "draft"`
+- **Presence:** `${ page.title }`
+- **Negated presence / unary negation:** `!${ page.more }`
+- **Binary equality and inequality:** `${ page.visibility } == "draft"` or `${ page.visibility } != "draft"`
 - **Binary regular-expression match:** `${ page.path } =~ "^/blog/"` or `${ page.path } !~ "^/admin/"`
-- **Membership:** `${ page.kind } in ${ site.allowed_kinds }`
-- **Negated membership:** `${ page.kind } not in ${ site.blocked_kinds }`
+- **Membership:** `${ page.category } in ${ site.featured_categories }`
+- **Negated membership:** `${ page.category } not in ${ site.hidden_categories }`
 
 Unquoted comparison operands are literal values; use `${ ... }` for data lookups. Use uppercase `OR` between alternative statements. Evaluation is lazy, but every statement must be syntactically valid. The runtime also accepts `=!`, `~=`, and `~!` as alternate spellings of `!=`, `=~`, and `!~`; use the canonical spellings above in new templates.
 
@@ -28,9 +28,9 @@ Repeated `ht-if` attributes on one element are AND conditions: every attribute m
 ## Examples
 
 ```html
-<article ht-if='${ page.published } OR ${ site.preview }'>...</article>
-<a ht-if='${ page.kind } == "article"' ht-apply href="${ page.href }">Read more</a>
-<a ht-if='${ page.published }' ht-if='${ page.kind } == "article"' ht-apply href="${ page.href }">Read more</a>
+<article ht-if='${ page.visibility } == "public" OR ${ page.visibility } == "unlisted"'>...</article>
+<a ht-apply ht-if='${ page.more }' href="${ page.path }">Read more</a>
+<a ht-apply ht-if='${ page.more }' ht-if='${ page.visibility } == "public"' href="${ page.path }">Read more</a>
 ```
 
 ## Specification

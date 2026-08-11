@@ -29,8 +29,8 @@ func TestSkillsExposeBundledFrontmatter(t *testing.T) {
 		if skill.Description != want[skill.Name] {
 			t.Fatalf("%s description = %q, want %q", skill.Name, skill.Description, want[skill.Name])
 		}
-		if skill.Version == nil || *skill.Version < 1 {
-			t.Fatalf("%s version = %v, want positive version", skill.Name, skill.Version)
+		if skill.Version == "" {
+			t.Fatalf("%s is unversioned", skill.Name)
 		}
 		content, err := Read(skill.Name)
 		if err != nil {
@@ -48,13 +48,13 @@ func TestParseValidatesSupportedFrontmatter(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if skill.Name != "example" || skill.Description != "Example skill." || skill.Version == nil || *skill.Version != 2 {
+	if skill.Name != "example" || skill.Description != "Example skill." || skill.Version != "2" {
 		t.Fatalf("Parse() = %#v", skill)
 	}
 	for _, content := range [][]byte{
 		[]byte("# No frontmatter\n"),
 		[]byte("---\nname: example\nversion: 1\n---\n"),
-		[]byte("---\nname: example\ndescription: Example\nversion: -1\n---\n"),
+		[]byte("---\nname: example\ndescription: Example\nversion: \"\"\n---\n"),
 	} {
 		if _, err := Parse(content); err == nil {
 			t.Fatalf("Parse(%q) succeeded", content)

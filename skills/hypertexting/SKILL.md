@@ -1,7 +1,7 @@
 ---
 name: hypertexting
 description: HyperTexting orchestration skill.
-version: 1
+version: "2026-08"
 ---
 
 # HyperTexting

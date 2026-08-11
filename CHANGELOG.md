@@ -5,6 +5,13 @@ this file.
 
 ## Unreleased
 
+- **Changed:** Made `Skill.Version` a required opaque string, enabling
+  lexicographically ordered ISO-style skill revisions such as `2026-08`.
+- **Added:** Documented declarative site and page feeds, automatic tag feeds
+  and landing pages, visibility groups, status-page layouts, and redirects.
+- **Changed:** Updated conditional-template examples to use supported page
+  data, including `page.visibility`.
+
 ## v0.2.0 (2026-08-03)
 
 - **Changed:** Documented pull-based `ht-pipe` destinations, root-document collection, source removal, and rendered-element deduplication.

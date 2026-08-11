@@ -1,7 +1,7 @@
 ---
 name: hypertexting-html
 description: General HTML authoring guidelines.
-version: 1
+version: "2026-08"
 ---
 
 # HyperTexting HTML
