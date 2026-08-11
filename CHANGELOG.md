@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.3.0 (2026-08-11)
+
 - **Changed:** Made `Skill.Version` a required opaque string, enabling
   lexicographically ordered ISO-style skill revisions such as `2026-08`.
 - **Added:** Documented declarative site and page feeds, automatic tag feeds
