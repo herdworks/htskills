@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.4.0 (2026-08-12)
+
 - **Breaking:** Renamed `Skills()` to `Catalog()` and introduced the `Skills`
   collection type with `ColumnValues` for catalog listings.
 - **Changed:** Updated every bundled skill revision to `2026-08-12`.
