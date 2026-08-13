@@ -5,6 +5,10 @@ this file.
 
 ## Unreleased
 
+- **Breaking:** Renamed `Skills()` to `Catalog()` and introduced the `Skills`
+  collection type with `ColumnValues` for catalog listings.
+- **Changed:** Updated every bundled skill revision to `2026-08-12`.
+
 ## v0.3.0 (2026-08-11)
 
 - **Changed:** Made `Skill.Version` a required opaque string, enabling

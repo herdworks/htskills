@@ -1,7 +1,7 @@
 ---
 name: hypertexting-assets
 description: Website asset management skill.
-version: "2026-08"
+version: "2026-08-12"
 ---
 
 # HyperTexting assets

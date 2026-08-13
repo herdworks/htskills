@@ -27,6 +27,22 @@ type Skill struct {
 	Version     string `yaml:"version"`
 }
 
+// Skills is a collection of bundled skill metadata.
+type Skills []Skill
+
+// ColumnValues returns the values for a supported catalog column.
+func (skills Skills) ColumnValues(field string) (values []string) {
+	for _, skill := range skills {
+		switch field {
+		case "Name":
+			values = append(values, skill.Name)
+		case "Description":
+			values = append(values, skill.Description)
+		}
+	}
+	return values
+}
+
 // Parse reads and validates a skill's YAML frontmatter.
 func Parse(content []byte) (skill Skill, err error) {
 	const opening = "---\n"
@@ -53,13 +69,13 @@ func Parse(content []byte) (skill Skill, err error) {
 	return skill, nil
 }
 
-// Skills returns the metadata for every bundled skill in deterministic order.
-func Skills() ([]Skill, error) {
+// Catalog returns the metadata for every bundled skill in deterministic order.
+func Catalog() (Skills, error) {
 	entries, err := fs.ReadDir(FS, Root)
 	if err != nil {
 		return nil, err
 	}
-	skills := make([]Skill, 0, len(entries))
+	skills := make(Skills, 0, len(entries))
 	for _, entry := range entries {
 		if !entry.IsDir() {
 			continue
@@ -85,7 +101,7 @@ func Read(name string) ([]byte, error) {
 	if !fs.ValidPath(name) {
 		return nil, fmt.Errorf("unknown skill %q", name)
 	}
-	skills, err := Skills()
+	skills, err := Catalog()
 	if err != nil {
 		return nil, err
 	}

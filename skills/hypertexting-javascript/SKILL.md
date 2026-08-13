@@ -1,7 +1,7 @@
 ---
 name: hypertexting-javascript
 description: General JavaScript authoring guidelines.
-version: "2026-08"
+version: "2026-08-12"
 ---
 
 # HyperTexting JavaScript

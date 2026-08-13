@@ -1,7 +1,7 @@
 ---
 name: hypertexting-debugging
 description: Website and template debugging skill.
-version: "2026-08"
+version: "2026-08-12"
 ---
 
 # HyperTexting debugging

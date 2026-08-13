@@ -5,8 +5,8 @@ import (
 	"testing"
 )
 
-func TestSkillsExposeBundledFrontmatter(t *testing.T) {
-	skills, err := Skills()
+func TestCatalogExposesBundledFrontmatter(t *testing.T) {
+	skills, err := Catalog()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -23,7 +23,7 @@ func TestSkillsExposeBundledFrontmatter(t *testing.T) {
 		"hypertexting-themes":     "Website theme management skill.",
 	}
 	if len(skills) != len(want) {
-		t.Fatalf("Skills returned %d skills, want %d", len(skills), len(want))
+		t.Fatalf("Catalog returned %d skills, want %d", len(skills), len(want))
 	}
 	for _, skill := range skills {
 		if skill.Description != want[skill.Name] {
@@ -39,6 +39,22 @@ func TestSkillsExposeBundledFrontmatter(t *testing.T) {
 		if !strings.HasPrefix(string(content), "---\nname: "+skill.Name+"\n") {
 			t.Fatalf("Read(%q) returned invalid frontmatter", skill.Name)
 		}
+	}
+}
+
+func TestSkillsColumnValues(t *testing.T) {
+	skills := Skills{
+		{Name: "one", Description: "First skill."},
+		{Name: "two", Description: "Second skill."},
+	}
+	if got, want := strings.Join(skills.ColumnValues("Name"), ","), "one,two"; got != want {
+		t.Fatalf("ColumnValues(Name) = %q, want %q", got, want)
+	}
+	if got, want := strings.Join(skills.ColumnValues("Description"), ","), "First skill.,Second skill."; got != want {
+		t.Fatalf("ColumnValues(Description) = %q, want %q", got, want)
+	}
+	if got := skills.ColumnValues("Version"); got != nil {
+		t.Fatalf("ColumnValues(Version) = %v, want nil", got)
 	}
 }
 

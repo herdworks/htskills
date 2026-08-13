@@ -8,7 +8,7 @@ The package exposes the complete bundle through `htskills.FS`, rooted at
 individual skill directory for installation.
 
 `htskills.Skill` defines the supported `SKILL.md` frontmatter schema. Use
-`htskills.Skills()` to enumerate validated bundled metadata, `htskills.Read`
+`htskills.Catalog()` to enumerate validated bundled metadata, `htskills.Read`
 to read one bundled `SKILL.md`, and `htskills.Parse` to validate frontmatter
 from an installed skill.
 

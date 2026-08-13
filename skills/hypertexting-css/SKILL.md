@@ -1,7 +1,7 @@
 ---
 name: hypertexting-css
 description: General CSS authoring guidelines.
-version: "2026-08"
+version: "2026-08-12"
 ---
 
 # HyperTexting CSS
