@@ -1,7 +1,7 @@
 ---
 name: hypertexting-assets
 description: Website asset management skill.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting assets
@@ -32,9 +32,9 @@ Organize static assets by the narrowest scope that owns and reuses them.
 
 ## Tools
 
-- `hyperctl cms asset add` adds a static asset to a website.
-- `hyperctl cms asset ls` lists static assets.
-- `hyperctl cms asset lookup` finds a static asset by path.
+- `hyperctl website asset add` adds a static asset to a website.
+- `hyperctl website asset ls` lists static assets.
+- `hyperctl website asset lookup` finds a static asset by path.
 
 ## References
 

@@ -1,7 +1,7 @@
 ---
 name: hypertexting-data
 description: Website data management skill.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting data
@@ -61,8 +61,8 @@ HyperTexting is a data-driven content management system and static site generato
 
 - `hyperctl agent schema describe website` describes the `website` object contract.
 - `hyperctl agent schema describe page` describes the `page` object contract.
-- `hyperctl cms new website` creates a website.
-- `hyperctl cms new page` creates a page.
+- `hyperctl website init` creates a website in the current directory.
+- `hyperctl website page new` creates a page.
 
 ## References
 

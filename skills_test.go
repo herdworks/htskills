@@ -42,6 +42,19 @@ func TestCatalogExposesBundledFrontmatter(t *testing.T) {
 	}
 }
 
+func TestReadmeReturnsBundledOnboardingContent(t *testing.T) {
+	content, err := Readme()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(content), "HyperTexting is a content management system (CMS) and static site generator (SSG)") {
+		t.Fatalf("Readme() returned incomplete onboarding content: %q", content)
+	}
+	if !strings.HasSuffix(string(content), "\n") {
+		t.Fatal("Readme() does not end with a newline")
+	}
+}
+
 func TestSkillsColumnValues(t *testing.T) {
 	skills := Skills{
 		{Name: "one", Description: "First skill."},

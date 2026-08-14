@@ -5,6 +5,10 @@ this file.
 
 ## Unreleased
 
+- **Changed:** Updated the bundled skills and agent onboarding to use
+  Hyperctl's `website` and `theme` command tree, and set every skill revision
+  to `2026-08-13`.
+
 ## v0.4.0 (2026-08-12)
 
 - **Breaking:** Renamed `Skills()` to `Catalog()` and introduced the `Skills`
@@ -25,7 +29,7 @@ this file.
 - **Changed:** Documented pull-based `ht-pipe` destinations, root-document collection, source removal, and rendered-element deduplication.
 - **Changed:** Required ordered component and layout style blocks so layout-specific CSS overrides component defaults through the normal cascade.
 - **Changed:** Allowed full-page and component-first layout development workflows to converge on the same reusable fragment structure.
-- **Added:** Documented rootless component rendering with `hyperctl dev render` and fixture JSON data.
+- **Added:** Documented rootless component rendering with `httt render` and fixture JSON data.
 - **Changed:** Aligned HTML, CSS, JavaScript, debugging, and plugin verification guidance with component rendering and full-site build boundaries.
 
 ## v0.1.0 (2026-08-03)

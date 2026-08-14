@@ -1,7 +1,7 @@
 ---
 name: hypertexting-html
 description: General HTML authoring guidelines.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting HTML
@@ -41,7 +41,7 @@ Author the HTML first. HyperTexting pre-renders static HTML at build time throug
 
 ## Tools
 
-- Use `hyperctl dev render` with a rootless component fragment and fixture JSON to verify rendered markup without creating a page layout first.
+- Use `hyperctl theme render --theme <theme.json> --data <fixture>.json --fragment <fragment>` with fixture JSON to verify rootless component markup without creating a page layout first.
 
 ## References
 

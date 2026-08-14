@@ -1,7 +1,7 @@
 ---
 name: hypertexting-debugging
 description: Website and template debugging skill.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting debugging
@@ -12,7 +12,7 @@ Use HyperTexting's declarative commands and directives before writing diagnostic
 
 ## Workflow
 
-1. Reproduce an isolated component problem with `hyperctl dev render` and fixture JSON, or reproduce a composition problem in a site context.
+1. Reproduce an isolated component problem with `hyperctl theme render --theme <theme.json> --data <fixture>.json --fragment <fragment>`, or reproduce a composition problem in a site context.
 2. Use `ht-debug` to inspect the affected element or complete template variable.
 3. Render again and inspect the output and debug log.
 4. Check the owning skill's known issues before investigating expected behavior.
@@ -26,11 +26,11 @@ Use HyperTexting's declarative commands and directives before writing diagnostic
 - Use `element` to print the rendered element.
 - Use a complete `${ ... }` expression to print a template value.
 - Remove debugging attributes after confirming the result.
-- Do not write a custom script to determine whether a fragment rendered or what template data is in scope; use `ht-debug` and `hyperctl dev render` first.
+- Do not write a custom script to determine whether a fragment rendered or what template data is in scope; use `ht-debug` and `hyperctl theme render` first.
 
 ## Tools
 
-- `hyperctl dev render` renders explicit documents or rootless fragments with fixture data; use a site context when the problem depends on composition or site data.
+- `hyperctl theme render` renders configured theme layouts or rootless fragments with fixture data in any supported template-data format; use a site context when the problem depends on composition or CMS data.
 
 ## References
 

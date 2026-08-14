@@ -15,9 +15,13 @@ import (
 // Root is the directory containing the bundled skills in FS.
 const Root = "skills"
 
-// FS contains the complete portable HyperTexting Agent Skills bundle.
+// ReadmePath is the path to the bundled agent onboarding README in FS.
+const ReadmePath = "readme/README.md"
+
+// FS contains the complete portable HyperTexting Agent Skills bundle and agent
+// onboarding README.
 //
-//go:embed all:skills
+//go:embed all:skills all:readme
 var FS embed.FS
 
 // Skill is the supported YAML frontmatter schema for a bundled skill.
@@ -111,4 +115,9 @@ func Read(name string) ([]byte, error) {
 		}
 	}
 	return nil, fmt.Errorf("unknown skill %q", name)
+}
+
+// Readme returns the bundled agent onboarding README.
+func Readme() ([]byte, error) {
+	return FS.ReadFile(ReadmePath)
 }

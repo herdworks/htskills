@@ -1,7 +1,7 @@
 ---
 name: hypertexting-layouts
 description: HTML templating skill.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting layouts
@@ -49,13 +49,13 @@ Compose complete HTML documents from reusable fragments. Let the source design d
 
 ### Verify rendered output
 
-- Use `hyperctl dev render --data <fixture>.json --layout <fragment>.html` to develop a rootless component against its fixture data. It renders only the fragment nodes and does not require page data or inject built-ins.
+- Use `hyperctl theme render --theme <theme.json> --data <fixture>.json --fragment <fragment>` to develop a rootless component against its fixture data. It renders only the fragment nodes and does not require page data or inject built-ins.
 - Test fragment composition inside a site directory with a throwaway page.
 - Validate rendered output as well as build logs, especially when debugging bindings.
 
 ## Tools
 
-- `hyperctl dev render` renders either an explicit HTML document or a rootless fragment. Pass relative layout paths; absolute layout paths are rejected.
+- `hyperctl theme render` renders either a configured theme layout (`--layout`) or rootless theme fragment (`--fragment`) against fixture data in any supported template-data format. It does not construct HyperTexting site or page data.
 
 ## References
 

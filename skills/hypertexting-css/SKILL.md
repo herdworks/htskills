@@ -1,7 +1,7 @@
 ---
 name: hypertexting-css
 description: General CSS authoring guidelines.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting CSS
@@ -58,7 +58,7 @@ Build light-DOM styles from shared foundations and fragment-owned component CSS.
 
 ## Tools
 
-- Use `hyperctl dev render` with a rootless fragment and fixture JSON to verify component markup and styles during development; render the composed layout to verify the final cascade and responsive behavior.
+- Use `hyperctl theme render --theme <theme.json> --data <fixture>.json --fragment <fragment>` with fixture JSON to verify component markup and styles during development; use layout mode to verify the final cascade and responsive behavior.
 
 ## References
 

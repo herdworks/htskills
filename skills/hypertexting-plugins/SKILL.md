@@ -1,7 +1,7 @@
 ---
 name: hypertexting-plugins
 description: Website plugins skill.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting plugins
@@ -37,7 +37,7 @@ Use a plugin only when static HTML, CSS, template variables, and source data can
 
 ## Tools
 
-- `hyperctl build` verifies build-time plugin output in the full site context.
+- `hyperctl website build` verifies build-time plugin output in the full site context.
 
 ## References
 

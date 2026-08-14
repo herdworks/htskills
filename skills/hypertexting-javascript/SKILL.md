@@ -1,7 +1,7 @@
 ---
 name: hypertexting-javascript
 description: General JavaScript authoring guidelines.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting JavaScript
@@ -44,7 +44,7 @@ Use browser JavaScript to progressively enhance a useful pre-rendered HTML compo
 
 ## Tools
 
-- Use `hyperctl dev render` with a rootless component fragment and fixture JSON to verify its pre-rendered HTML baseline; use a full document render to verify composition before browser testing.
+- Use `hyperctl theme render --theme <theme.json> --data <fixture>.json --fragment <fragment>` to verify a component's pre-rendered HTML baseline; use layout mode to verify composition before browser testing.
 - Use browser developer tools to verify the enhanced interaction and the no-JavaScript baseline.
 
 ## References

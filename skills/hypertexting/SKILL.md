@@ -1,7 +1,7 @@
 ---
 name: hypertexting
 description: HyperTexting orchestration skill.
-version: "2026-08-12"
+version: "2026-08-13"
 ---
 
 # HyperTexting
@@ -40,8 +40,8 @@ version: "2026-08-12"
 
 ### Deterministic builds
 
-- Pass a predictable build identifier directly: `hyperctl build --id <build-id>`.
-- Do not wrap `hyperctl build` in a script merely to capture its auto-generated ID.
+- Pass a predictable build identifier directly: `hyperctl website build --id <build-id>`.
+- Do not wrap `hyperctl website build` in a script merely to capture its auto-generated ID.
 
 ## Tools
 
