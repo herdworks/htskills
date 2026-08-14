@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.5.0 (2026-08-13)
+
 - **Changed:** Updated the bundled skills and agent onboarding to use
   Hyperctl's `website` and `theme` command tree, and set every skill revision
   to `2026-08-13`.
