@@ -63,6 +63,7 @@ Use a page-local alias to choose the feed data that its template renders.
 
 ```yaml
 feeds:
+  main:
   latest:
     source: blog
     limit: 5
@@ -70,9 +71,11 @@ feeds:
     tag: news
 ```
 
-- Each alias uses exactly one of `source` or `tag`.
-- `source` names a configured `site.feeds` identifier.
-  An unknown source is a validation error.
+- An alias may set `source` or `tag`, but not both. When neither is set, the
+  alias is used as the configured `site.feeds` identifier; for example,
+  `main:` selects `site.feeds.main`.
+- `source`, whether explicit or inferred from the alias, names a configured
+  `site.feeds` identifier. An unknown source is a validation error.
 - `tag` selects the automatic feed for that tag.
   Unknown tags are treated as empty feeds.
 - `limit` is optional and must be non-negative.

@@ -5,6 +5,12 @@ this file.
 
 ## Unreleased
 
+- **Added:** Documented `hyperctl theme check` as the standard rendered-output
+  validation step in the HyperTexting debugging skill, including `--tidy`
+  directive artifact checks.
+- **Changed:** Documented implicit `page.feeds` sources: an alias without
+  `source` or `tag` selects the same-named configured site feed.
+
 ## v0.5.0 (2026-08-13)
 
 - **Changed:** Updated the bundled skills and agent onboarding to use

@@ -1,7 +1,7 @@
 ---
 name: hypertexting-data
 description: Website data management skill.
-version: "2026-08-13"
+version: "2026-08-15"
 ---
 
 # HyperTexting data
@@ -36,7 +36,7 @@ HyperTexting is a data-driven content management system and static site generato
 - Prefer YAML or JSON for structured content, such as landing pages; prefer Markdown with YAML front matter for prose, such as blog posts.
 - Put page-specific structured data, such as `hero` or `features` blocks, directly in the corresponding page data file.
 - Set `visibility` to control whether the page appears on the website, in feeds, and in builds. Set `spec.visibility` on a content type when the content type owns that visibility choice.
-- Use `feeds.<alias>` to expose one configured site feed (`source`) or one automatic tag feed (`tag`) to this page's template. Consult [feeds.md](references/feeds.md) and [visibility.md](references/visibility.md) for the authored-data contracts.
+- Use `feeds.<alias>` to expose a configured site feed or an automatic tag feed to this page's template. Omit `source` and `tag` to use the alias as the configured site-feed name. Consult [feeds.md](references/feeds.md) and [visibility.md](references/visibility.md) for the authored-data contracts.
 
 **Example:** For a complex home page that is not primarily prose, use `content/index.yaml` or `content/index.json` with custom properties. Do not split its data between `content/index.md` and a separate `data/homepage.yaml` namespace.
 
