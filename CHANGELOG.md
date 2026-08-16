@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.6.0 (2026-08-15)
+
 - **Added:** Documented `hyperctl theme check` as the standard rendered-output
   validation step in the HyperTexting debugging skill, including `--tidy`
   directive artifact checks.
