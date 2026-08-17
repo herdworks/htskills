@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.7.0 (2026-08-17)
+
 - **Added:** `hypertexting-theme-development`, a visual-direction-to-theme
   workflow for complete, content-agnostic themes: requirements, design
   systems, author customization, implementation, and iterative review.
