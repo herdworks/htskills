@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.7.1 (2026-08-17)
+
 - **Added:** Design-asset management that preserves customer-provided inputs
   separately from web-delivered static assets, with a documented website-root
   design directory.
