@@ -1,7 +1,7 @@
 ---
 name: hypertexting-plugins
 description: Website plugins skill.
-version: "2026-08-13"
+version: "2026-08-17"
 ---
 
 # HyperTexting plugins

@@ -1,7 +1,7 @@
 ---
 name: hypertexting
 description: HyperTexting orchestration skill.
-version: "2026-08-13"
+version: "2026-08-17"
 ---
 
 # HyperTexting
@@ -24,11 +24,13 @@ version: "2026-08-13"
 
 - Use `hypertexting-html` to author semantic elements and markup-driven components.
 - Use `hypertexting-layouts` to compose HTML into reusable layouts and fragments with template data and directives.
+- Use `hypertexting-theme-development` to turn visual direction and website context into a complete, content-agnostic theme.
 - Use `hypertexting-themes` to organize reusable layouts and related presentation resources into a website theme.
 
 ### Route focused work
 
 - Use `hypertexting-data` to choose data scope, source files, and computed-namespace contracts.
+- Use `hypertexting-theme-development` to create or redesign a theme before its layouts and implementation details are authored.
 - Use `hypertexting-themes` for reusable themes and theme packaging or migration.
 - Use `hypertexting-layouts` for semantic layouts, fragments, and directives.
 - Use `hypertexting-assets` for theme, website, and page static assets.
@@ -49,6 +51,8 @@ version: "2026-08-13"
 - `hyperctl agent skill update hypertexting <path>` updates this orchestration skill.
 - `hyperctl agent skill install hypertexting-data <path>` installs the data skill.
 - `hyperctl agent skill update hypertexting-data <path>` updates the data skill.
+- `hyperctl agent skill install hypertexting-theme-development <path>` installs the theme development skill.
+- `hyperctl agent skill update hypertexting-theme-development <path>` updates the theme development skill.
 - `hyperctl agent skill install hypertexting-themes <path>` installs the themes skill.
 - `hyperctl agent skill update hypertexting-themes <path>` updates the themes skill.
 - `hyperctl agent skill install hypertexting-layouts <path>` installs the layouts skill.
@@ -70,6 +74,7 @@ version: "2026-08-13"
 
 - Consult [architecture.md](references/architecture.md) as needed for HyperTexting's static-first architecture and progressive-enhancement model.
 - `hyperctl agent skill describe hypertexting-data`
+- `hyperctl agent skill describe hypertexting-theme-development`
 - `hyperctl agent skill describe hypertexting-themes`
 - `hyperctl agent skill describe hypertexting-layouts`
 - `hyperctl agent skill describe hypertexting-debugging`

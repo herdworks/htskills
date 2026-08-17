@@ -5,6 +5,14 @@ this file.
 
 ## Unreleased
 
+- **Added:** `hypertexting-theme-development`, a visual-direction-to-theme
+  workflow for complete, content-agnostic themes: requirements, design
+  systems, author customization, implementation, and iterative review.
+- **Changed:** Routed new-theme and redesign work from the HyperTexting
+  orchestration skill to `hypertexting-theme-development`; narrowed `hypertexting-themes`
+  to theme organization and lifecycle operations.
+- **Changed:** Updated every bundled skill revision to `2026-08-17`.
+
 ## v0.6.0 (2026-08-15)
 
 - **Added:** Documented `hyperctl theme check` as the standard rendered-output

@@ -1,7 +1,7 @@
 ---
 name: hypertexting-data
 description: Website data management skill.
-version: "2026-08-15"
+version: "2026-08-17"
 ---
 
 # HyperTexting data
@@ -52,6 +52,10 @@ HyperTexting is a data-driven content management system and static site generato
 **Example:** For an archive page that groups `site.pages` by year and month, create `data/archive.js` to return an archive map instead of maintaining a duplicate static `archive.yaml` file.
 
 ### Theme data
+
+Use `hypertexting-theme-development` to decide which author-facing `site.*`, `page.*`, and
+`data.*` inputs a theme supports; use this skill to implement their files,
+namespaces, and resolution mechanics.
 
 - Place unstructured theme data in the directory configured by `theme.config.data_dir`.
 - Use YAML (`.yaml` or `.yml`), JSON (`.json`), OPML (`.opml`), or CSV (`.csv`) for theme data files.

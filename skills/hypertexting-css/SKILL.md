@@ -1,7 +1,7 @@
 ---
 name: hypertexting-css
 description: General CSS authoring guidelines.
-version: "2026-08-13"
+version: "2026-08-17"
 ---
 
 # HyperTexting CSS
@@ -21,7 +21,8 @@ Build light-DOM styles from shared foundations and fragment-owned component CSS.
 ### Establish CSS foundations
 
 - Avoid shadow DOM.
-- Use light DOM and static CSS in this order: `reset.css`, `variables.css`, optional `grid.css`, then `colors.css` with at least light and dark schemes.
+- Use light DOM and static CSS in this order: `reset.css`, `variables.css`, optional `grid.css`, then `colors.css` for every color scheme the theme supports.
+- Implement the theme's light and dark schemes with the operating system's `prefers-color-scheme` preference unless the theme requirements explicitly indicate otherwise.
 - Use no more than three or four responsive breakpoints.
 - Give CSS custom-property reads a fallback, such as `padding: var(--example, 15px)`.
 - Use CSS for visual-only transformations, such as `text-transform: uppercase`; do not create a build-time plugin for them.
