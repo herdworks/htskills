@@ -5,6 +5,15 @@ this file.
 
 ## Unreleased
 
+- **Added:** Design-asset management that preserves customer-provided inputs
+  separately from web-delivered static assets, with a documented website-root
+  design directory.
+- **Changed:** Routed theme bootstrap and review through the design-asset
+  workflow when users provide new inputs.
+- **Changed:** Aligned skill descriptions so HyperTexting-specific skills
+  identify their product or website scope, while HTML, CSS, and JavaScript
+  remain general authoring guidance.
+
 ## v0.7.0 (2026-08-17)
 
 - **Added:** `hypertexting-theme-development`, a visual-direction-to-theme

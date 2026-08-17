@@ -2,11 +2,11 @@
 
 ## Overview
 
-HyperTexting builds static websites: HyperTemplates pre-renders HTML and assets at build time, and the resulting files can be served without request-time page rendering. This follows a static-first, decoupled approach aligned with Jamstack principles.
+HyperTexting builds static websites: HyperTemplates pre-renders HTML and static assets at build time, and the resulting files can be served without request-time page rendering. This follows a static-first, decoupled approach aligned with Jamstack principles.
 
 ## Instructions
 
-- Build complete, useful HTML and assets before adding browser-time behavior or backend dependencies.
+- Build complete, useful HTML and static assets before adding browser-time behavior or backend dependencies.
 - Use semantic HTML and CSS as the baseline experience; progressively enhance only where a component needs behavior.
 - Treat each interactive custom element as an isolated, islands-style enhancement. Do not turn an entire page into a client application.
 - Use the Web Component API only for the individual custom elements that need browser-time interaction.
@@ -16,7 +16,7 @@ HyperTexting builds static websites: HyperTemplates pre-renders HTML and assets 
 ## Examples
 
 ```text
-Static page: pre-rendered HTML, CSS, and assets
+Static page: pre-rendered HTML, CSS, and static assets
 Interactive menu: a progressively enhanced <site-menu> custom element
 Account action: an isolated API request from the component that needs it
 ```

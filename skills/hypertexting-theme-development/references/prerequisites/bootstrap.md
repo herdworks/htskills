@@ -14,7 +14,8 @@ See `hypertexting-themes` for theme configuration and organization.
 - Inspect the current directory for an existing website and selected theme before creating either one.
 - Use an existing website when it has representative content; otherwise create a demo website or ask for a destination directory.
 - Initialize or identify the theme root inside that website; consult `hypertexting-themes` before choosing its configuration or organization.
-- Ask whether the user has content to use when the website is empty or unrepresentative.
+- Use `hypertexting-assets` to preserve and classify supplied design assets before using them in the theme.
+- Ask whether the user has content or design assets to use when the website is empty or unrepresentative.
 - Offer to generate sample content and fixture data when the user has no content to provide; use it to exercise the theme, not as claimed production content.
 
 ## Examples
@@ -37,4 +38,5 @@ No website or no representative content
 
 Consult `hyperctl website init --help` and `hyperctl theme init --help` for
 current bootstrap options. Consult `hypertexting-themes` for the theme
-configuration and directory contract.
+configuration and directory contract, and `hypertexting-assets` for asset
+management.

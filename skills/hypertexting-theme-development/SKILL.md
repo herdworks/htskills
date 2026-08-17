@@ -1,6 +1,6 @@
 ---
 name: hypertexting-theme-development
-description: Turn Figma, Adobe assets, screenshots, or AI/code mockups into complete, content-agnostic HyperTexting website themes. Use when creating or redesigning a theme from partial visual direction.
+description: Develop new HyperTexting themes from visual design assets.
 version: "2026-08-17"
 ---
 
@@ -8,7 +8,7 @@ version: "2026-08-17"
 
 ## Overview
 
-Use this skill to extend supplied visual direction—such as Figma, Adobe assets,
+Use this skill to extend supplied visual direction—such as Figma, Adobe design assets,
 screenshots, or an AI/code mockup—into a complete HyperTexting website theme.
 A complete theme provides layouts, shared regions, visual systems, components,
 and a documented customization contract. It does not provide the website's real
@@ -55,7 +55,7 @@ before authoring layouts or styles.
 - Use `hypertexting-layouts` for layouts, fragments, directives, and fragment data contracts.
 - Use `hypertexting-html` for semantic markup and accessibility semantics.
 - Use `hypertexting-css` for static CSS foundations, component styles, and cascade mechanics.
-- Use `hypertexting-assets` for static asset placement and precedence.
+- Use `hypertexting-assets` for asset management, placement, and precedence.
 - Use `hypertexting-javascript` only for progressive enhancement that semantic HTML and CSS cannot provide.
 - Use `hypertexting-themes` to organize, package, install, switch, or migrate a completed theme.
 

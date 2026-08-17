@@ -1,6 +1,6 @@
 ---
 name: hypertexting-data
-description: Website data management skill.
+description: HyperTexting data management skill.
 version: "2026-08-17"
 ---
 

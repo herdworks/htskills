@@ -14,6 +14,7 @@ unfinished production content.
 - Relate each surface to the documented information architecture, visual systems, and customization contract.
 - Call out consequential extensions to the supplied direction as decisions, explain their purpose, and invite feedback on them.
 - Ask for feedback on the work shown; do not ask the user to design missing surfaces from scratch.
+- Preserve and classify any new user-provided design assets with `hypertexting-assets` before using them in the next implementation pass.
 - Record accepted review feedback in the theme README before making the next implementation pass.
 
 ### Preview on a local network

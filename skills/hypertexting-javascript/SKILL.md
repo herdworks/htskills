@@ -27,7 +27,7 @@ Use browser JavaScript to progressively enhance a useful pre-rendered HTML compo
 - Enhance one custom element at a time; do not turn the entire page into a client application.
 - Keep initial content, navigation, and essential actions useful without JavaScript.
 - Keep selectors local to the component and avoid shadow DOM.
-- Use `hypertexting-plugins` for build-time JavaScript and `hypertexting-assets` to choose the scope for a browser script asset.
+- Use `hypertexting-plugins` for build-time JavaScript and `hypertexting-assets` to choose the scope for a static browser-script asset.
 
 ### Implement Web Components
 

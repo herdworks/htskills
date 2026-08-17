@@ -1,6 +1,6 @@
 ---
 name: hypertexting-themes
-description: Website theme management skill.
+description: HyperTexting theme management skill.
 version: "2026-08-17"
 ---
 
@@ -41,7 +41,7 @@ themes/
 ### Organize a theme root
 
 - Treat the theme as the reusable presentation layer of every HyperTexting website.
-- Keep website-specific content and assets outside the theme; keep reusable presentation assets in it.
+- Keep website-specific content and static assets outside the theme; keep reusable theme static assets in it.
 - Put only broadly reusable defaults in the theme.
 - Place package resources in the configured theme directories: `types`, `blocks`, `layouts`, `fragments`, `plugins`, `data`, and `static` by default.
 - Configure alternate directory names only as safe relative paths in `theme.json`.

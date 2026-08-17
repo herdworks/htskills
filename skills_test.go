@@ -11,17 +11,17 @@ func TestCatalogExposesBundledFrontmatter(t *testing.T) {
 		t.Fatal(err)
 	}
 	want := map[string]string{
-		"hypertexting":                   "HyperTexting orchestration skill.",
-		"hypertexting-assets":            "Website asset management skill.",
+		"hypertexting":                   "HyperTexting website orchestration skill.",
+		"hypertexting-assets":            "HyperTexting asset management skill.",
 		"hypertexting-css":               "General CSS authoring guidelines.",
-		"hypertexting-data":              "Website data management skill.",
-		"hypertexting-debugging":         "Website and template debugging skill.",
+		"hypertexting-data":              "HyperTexting data management skill.",
+		"hypertexting-debugging":         "HyperTexting debugging skill.",
 		"hypertexting-html":              "General HTML authoring guidelines.",
 		"hypertexting-javascript":        "General JavaScript authoring guidelines.",
-		"hypertexting-layouts":           "HTML templating skill.",
-		"hypertexting-plugins":           "Website plugins skill.",
-		"hypertexting-theme-development": "Turn Figma, Adobe assets, screenshots, or AI/code mockups into complete, content-agnostic HyperTexting website themes. Use when creating or redesigning a theme from partial visual direction.",
-		"hypertexting-themes":            "Website theme management skill.",
+		"hypertexting-layouts":           "HyperTexting HTML templating skill.",
+		"hypertexting-plugins":           "HyperTexting plugins skill.",
+		"hypertexting-theme-development": "Develop new HyperTexting themes from visual design assets.",
+		"hypertexting-themes":            "HyperTexting theme management skill.",
 	}
 	if len(skills) != len(want) {
 		t.Fatalf("Catalog returned %d skills, want %d", len(skills), len(want))

@@ -1,6 +1,6 @@
 ---
 name: hypertexting
-description: HyperTexting orchestration skill.
+description: HyperTexting website orchestration skill.
 version: "2026-08-17"
 ---
 
@@ -33,7 +33,7 @@ version: "2026-08-17"
 - Use `hypertexting-theme-development` to create or redesign a theme before its layouts and implementation details are authored.
 - Use `hypertexting-themes` for reusable themes and theme packaging or migration.
 - Use `hypertexting-layouts` for semantic layouts, fragments, and directives.
-- Use `hypertexting-assets` for theme, website, and page static assets.
+- Use `hypertexting-assets` for design assets and theme, website, and page static assets.
 - Use `hypertexting-html` for semantic markup, custom elements, and markup-first progressive enhancement.
 - Use `hypertexting-plugins` for reusable template-variable or computed-data plugins after their contract is defined.
 - Use `hypertexting-css` for light-DOM and component CSS.
