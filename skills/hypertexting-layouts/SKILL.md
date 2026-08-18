@@ -1,7 +1,9 @@
 ---
 name: hypertexting-layouts
 description: HyperTexting HTML templating skill.
-version: "2026-08-17"
+compatibility: Requires hyperctl.
+metadata:
+  version: "2026-08-18T19:07:00Z"
 ---
 
 # HyperTexting layouts
@@ -9,10 +11,6 @@ version: "2026-08-17"
 ## Overview
 
 Compose complete HTML documents from reusable fragments. Let the source design determine whether authoring begins with a page layout or component fragment; both paths must converge on layouts composed from fragments with clear data contracts.
-
-When partial visual direction must become a complete theme, use
-`hypertexting-theme-development` first to establish requirements and design. Use this skill
-to implement the resulting HyperTemplates layouts and fragments.
 
 ## Workflow
 

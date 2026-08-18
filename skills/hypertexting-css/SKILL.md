@@ -1,7 +1,9 @@
 ---
 name: hypertexting-css
 description: General CSS authoring guidelines.
-version: "2026-08-17"
+compatibility: Requires hyperctl.
+metadata:
+  version: "2026-08-18T20:27:00Z"
 ---
 
 # HyperTexting CSS
@@ -63,6 +65,10 @@ Build light-DOM styles from shared foundations and fragment-owned component CSS.
 
 ## References
 
+- Consult [color-schemes.md](references/color-schemes.md) as needed to implement semantic colors, supported schemes, and accessible states.
+- Consult [responsive-grid.md](references/responsive-grid.md) as needed to implement containers, layout geometry, breakpoints, and narrow-screen behavior.
+- Consult [typography.md](references/typography.md) as needed to implement type roles, readable measure, and resilient text styles.
+- Consult [component-styles.md](references/component-styles.md) as needed to style component baselines and supported states.
 - Consult `hyperctl agent skill describe hypertexting-layouts` for the `ht-pipe` contract and examples.
 - Consult the [ht-pipe reference](https://hypertemplates.net/docs/reference/core/directives/ht-pipe/) only if the bundled layout skill does not answer the question.
 - [CSS Web Components for Marketing Sites](https://hawkticehurst.com/2024/11/css-web-components-for-marketing-sites/)

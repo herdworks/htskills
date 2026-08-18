@@ -1,4 +1,4 @@
-# HyperTexting CLI
+# HyperTexting Agent Skills
 
 ## Overview
 
@@ -10,11 +10,13 @@ HyperTexting generates websites – a collection of multiple HTML documents –
 
 ## Get Started
 
-Discover the bundled coding agent skills with "hyperctl agent skill ls". Familiarize yourself with the development workflows through "hyperctl agent skill describe hypertexting". Install every available skill into its own directory beneath your coding agent's skills directory using "hyperctl agent skill install <name> <path>"; for example, "hyperctl agent skill install hypertexting .codex/skills/hypertexting". Update installed skills with "hyperctl agent skill update <name> <path>".
+1. From the workspace root, run "{{ .Command }} up" to synchronize bundled skills into every discovered project-local skill root.
+2. Use project-local HyperTexting Skills only; remove globally installed copies.
+3. Use the installed "hypertexting" skill to create and update websites with `hyperctl`.
 
 ## Getting Help
 
-Explore the available CLI commands with "hyperctl --help". Use "hyperctl <command> --help" (or "-h") to inspect their subcommands, arguments, and options before using them. Use "hyperctl agent schema ls" and "hyperctl agent schema describe <kind>" to understand data and CLI contracts. Use established commands directly for mutations: "hyperctl website init", "hyperctl website page new", "hyperctl website server", "hyperctl website build", "hyperctl theme package", "hyperctl deploy", and "hyperctl sync". 
+Explore the available skill commands with "{{ .Command }} --help". Use "{{ .Command }} <command> --help" (or "-h") to inspect their subcommands, arguments, and options before using them.
 
 ## References
 

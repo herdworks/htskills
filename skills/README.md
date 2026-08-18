@@ -4,7 +4,7 @@ Use this guide when authoring or updating the embedded HyperTexting skills.
 
 ## Required shape
 
-- Use YAML frontmatter with the skill `name`, a concise agent-facing `description`, and a quoted string `version`.
+- Use YAML frontmatter with the skill `name`, a concise agent-facing `description`, a `compatibility` declaration, and a quoted string `metadata.version`.
 - Start with a level-one title.
 - Include `## Overview`, `## Workflow`, `## Instructions`, `## Tools`, and `## References` in every `SKILL.md`.
 - Add `## Known issues` only when a documented, acceptable behavior can otherwise cause needless investigation.

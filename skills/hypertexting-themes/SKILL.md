@@ -1,7 +1,9 @@
 ---
 name: hypertexting-themes
 description: HyperTexting theme management skill.
-version: "2026-08-17"
+compatibility: Requires hyperctl.
+metadata:
+  version: "2026-08-18T20:28:00Z"
 ---
 
 # HyperTexting themes
@@ -10,7 +12,7 @@ version: "2026-08-17"
 
 A HyperTexting theme is the reusable presentation bundle for a website: at least one layout and its associated fragments, styles, static assets, plugins, and theme data. Theme data supplies default and sample values that layouts can use as fallbacks. Every HyperTexting website uses a theme—whether configured as a local `theme.json` at the website root or organized under a subdirectory. Keep website-specific content outside the theme. HyperTemplates provides the underlying theme organization and page-rendering engine.
 
-Use `hypertexting-theme-development` to create or redesign a complete theme from visual direction. Use this skill to organize, install, package, switch, or migrate themes.
+Use this skill to organize, install, package, switch, or migrate themes.
 
 ## Workflow
 
@@ -50,6 +52,7 @@ themes/
 ### Package themes
 
 - Package `theme.json` and files from configured theme resource directories with `hyperctl theme package`.
+- Run `unzip -t <package>.zip` after packaging to verify archive integrity.
 - Keep unrelated files outside those directories or configure their directory before packaging.
 
 ## Tools
@@ -62,5 +65,4 @@ themes/
 ## References
 
 - Consult [config.md](references/config.md) as needed for the `theme.json` contract and default resource directories.
-- Consult `hyperctl agent skill describe hypertexting-theme-development` when creating or redesigning a theme from visual direction.
 - Consult the [themes](https://hypertemplates.net/docs/reference/core/themes/) or [theme commands](https://hypertemplates.net/docs/reference/cli/commands/theme/) documentation only if the bundled reference does not answer the question.

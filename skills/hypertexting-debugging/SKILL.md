@@ -1,7 +1,9 @@
 ---
 name: hypertexting-debugging
 description: HyperTexting debugging skill.
-version: "2026-08-17"
+compatibility: Requires hyperctl.
+metadata:
+  version: "2026-08-18T19:07:00Z"
 ---
 
 # HyperTexting debugging

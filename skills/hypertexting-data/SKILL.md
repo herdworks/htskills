@@ -1,7 +1,9 @@
 ---
 name: hypertexting-data
 description: HyperTexting data management skill.
-version: "2026-08-17"
+compatibility: Requires hyperctl.
+metadata:
+  version: "2026-08-18T19:16:00Z"
 ---
 
 # HyperTexting data
@@ -24,6 +26,7 @@ HyperTexting is a data-driven content management system and static site generato
 
 - Create a `site.yaml`, `site.yml`, or `site.json` configuration file.
 - Treat the website as a `website` object; consult `hyperctl agent schema describe website` as needed.
+- Define the content families, collections, and browse paths before configuring their feeds. Consult [information-architecture.md](references/information-architecture.md) when a website's page, feed, tag, archive, or navigation-data model is not yet clear.
 - Define named Atom feeds in `site.feeds`. Each feed selects pages with `include` and `exclude` selectors, and may set ordered `sort` rules and an `html_url` alternate.
 - Consult [feeds.md](references/feeds.md) before defining a feed identifier or selector.
 
@@ -53,10 +56,6 @@ HyperTexting is a data-driven content management system and static site generato
 
 ### Theme data
 
-Use `hypertexting-theme-development` to decide which author-facing `site.*`, `page.*`, and
-`data.*` inputs a theme supports; use this skill to implement their files,
-namespaces, and resolution mechanics.
-
 - Place unstructured theme data in the directory configured by `theme.config.data_dir`.
 - Use YAML (`.yaml` or `.yml`), JSON (`.json`), OPML (`.opml`), or CSV (`.csv`) for theme data files.
 - Put theme-provided static data, such as placeholder or default values, in that directory.
@@ -70,6 +69,7 @@ namespaces, and resolution mechanics.
 
 ## References
 
+- Consult [information-architecture.md](references/information-architecture.md) as needed to model page families, content collections, feed projections, navigation data, and visibility as authored data contracts.
 - Consult [namespaces.md](references/namespaces.md) as needed for namespace paths, nested files, and collisions.
 - Consult [feeds.md](references/feeds.md) as needed for website feeds and page feed references.
 - Consult [visibility.md](references/visibility.md) as needed for page and content-type visibility.

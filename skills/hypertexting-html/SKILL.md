@@ -1,7 +1,9 @@
 ---
 name: hypertexting-html
 description: General HTML authoring guidelines.
-version: "2026-08-17"
+compatibility: Requires hyperctl.
+metadata:
+  version: "2026-08-18T19:07:00Z"
 ---
 
 # HyperTexting HTML
@@ -9,10 +11,6 @@ version: "2026-08-17"
 ## Overview
 
 Author the HTML first. HyperTexting pre-renders static HTML at build time through HyperTemplates, so let markup drive theme authoring; add CSS and JavaScript only as progressive enhancements. Most markup is ordinary, standards-based HTML rather than HyperTexting-specific syntax.
-
-When creating or redesigning a complete theme from partial visual direction,
-use `hypertexting-theme-development` first to establish requirements and design. Use this
-skill to make the resulting semantic markup decisions.
 
 ## Workflow
 

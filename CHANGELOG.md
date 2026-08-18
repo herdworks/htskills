@@ -5,6 +5,30 @@ this file.
 
 ## Unreleased
 
+- **Added:** A `compatibility` declaration to bundled skill frontmatter; the
+  catalog now requires it and every bundled skill declares `Requires hyperctl.`
+- **Added:** Data-oriented information-architecture guidance for page families,
+  collections, feed projections, navigation data, and visibility.
+- **Added:** CSS references for color schemes, responsive grids, typography,
+  and component styles.
+- **Added:** Reusable `htskills/cli` Clic command tree and standalone `htskills`
+  executable with `readme`, `ls`, `describe`, `install`, `update`, and `up`
+  commands.
+- **Changed:** Reworked `hypertexting` into a focused-skill router with a
+  mandatory build and rendered-output validation gate, plus conditional
+  component rendering and browser preview.
+- **Changed:** Updated theme packaging guidance to verify generated ZIP archives
+  with `unzip -t`.
+- **Changed:** `up [skills-directory]` synchronizes bundled skills into every
+  discovered project-local skill root, rejects global Claude and Codex skill
+  directories, and reports globally installed HyperTexting Skills as strongly
+  discouraged before writing local skills.
+- **Breaking:** Removed the bundled `hypertexting-theme-development` workflow;
+  its concerns are now owned by the focused skills.
+- **Breaking:** Moved the onboarding README from `htskills.FS` and
+  `htskills.Readme` to the templatable `htskills/readme` package's `README()`
+  function. `htskills.FS` now contains only bundled skills.
+
 ## v0.7.1 (2026-08-17)
 
 - **Added:** Design-asset management that preserves customer-provided inputs

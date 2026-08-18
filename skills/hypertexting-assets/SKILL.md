@@ -1,7 +1,9 @@
 ---
 name: hypertexting-assets
 description: HyperTexting asset management skill.
-version: "2026-08-17"
+compatibility: Requires hyperctl.
+metadata:
+  version: "2026-08-18T19:07:00Z"
 ---
 
 # HyperTexting assets
