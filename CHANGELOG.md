@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.8.0 (2026-08-18)
+
 - **Added:** A `compatibility` declaration to bundled skill frontmatter; the
   catalog now requires it and every bundled skill declares `Requires hyperctl.`
 - **Added:** Data-oriented information-architecture guidance for page families,
