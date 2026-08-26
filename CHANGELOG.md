@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.9.0 (2026-08-26)
+
 - **Breaking:** Reframed `ht-with` as the single-pass scoped-binding variant of
   `ht-each`. `ht-with` binds and renders exactly once, while making its values
   available as the target, descendants, and included fragments are processed;
