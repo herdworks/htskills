@@ -3,7 +3,7 @@ name: hypertexting-css
 description: General CSS authoring guidelines.
 compatibility: Requires hyperctl.
 metadata:
-  version: "2026-08-18T20:27:00Z"
+  version: "2026-08-26T00:00:00Z"
 ---
 
 # HyperTexting CSS

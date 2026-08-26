@@ -3,7 +3,7 @@ name: hypertexting
 description: HyperTexting website orchestration skill.
 compatibility: Requires hyperctl.
 metadata:
-  version: "2026-08-18T19:07:00Z"
+  version: "2026-08-26T00:00:00Z"
 ---
 
 # HyperTexting

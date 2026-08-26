@@ -3,7 +3,7 @@ name: hypertexting-data
 description: HyperTexting data management skill.
 compatibility: Requires hyperctl.
 metadata:
-  version: "2026-08-18T19:16:00Z"
+  version: "2026-08-26T00:00:00Z"
 ---
 
 # HyperTexting data

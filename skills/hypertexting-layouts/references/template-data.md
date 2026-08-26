@@ -18,21 +18,21 @@ Template data is the render context available to a layout or fragment. The `hype
 
 ## Directive scope
 
-- `ht-apply` and a standalone `ht-with` render only the target element's attributes and direct text-node children. A standalone `ht-with` causes an implicit `ht-apply`; its bindings do not reach descendant elements.
-- `ht-each` creates a scoped clone. Its loop binding, `each.index`, `each.count`, `each.total`, and any `ht-with` bindings are available throughout that clone, including an included fragment.
-- Bindings are source-ordered and may shadow an outer value; they do not escape their directive scope.
+- `ht-apply` renders only the target element's attributes and direct text-node children; it does not traverse descendants or create a local binding.
+- `ht-each` and `ht-with` bind values and make them available while processing the target and its descendants. `ht-each` binds and renders once per resolved value, including `each.index`, `each.count`, and `each.total`; `ht-with` binds and renders exactly once. Their bindings are available in included fragments.
+- Repeated `ht-with` bindings are source-ordered and may shadow an outer value; they do not escape their directive scope.
 - `ht-block` provides its placeholder attributes as `block` and child HTML as `block.content`; see [ht-block.md](ht-block.md).
 
 ## Fragment contracts
 
 Choose the directive that matches where the fragment consumes its input:
 
-- Use `ht-with` on an `ht-include` only when the included fragment's root element consumes one value in its own attributes or direct text. This is root-shallow rendering, not a way to pass data to descendant elements.
-- Use `ht-each` on an `ht-include` when the included fragment needs a binding anywhere in its markup. A list renders one included fragment per item; a plain object renders one fragment with that object as the binding.
+- Use `ht-with` on an `ht-include` when one included fragment needs a bound value anywhere in its markup.
+- Use `ht-each` on an `ht-include` when it should render one included fragment per resolved value.
 - Name the loop binding after the fragment contract, such as `heading` or `stat`, and add a brief comment at the top of a parameterized fragment naming that binding.
 
 ```html
-<!-- Root-only label in fragments/status-pill.html -->
+<!-- `label` is available throughout fragments/status-pill.html -->
 <status-pill ht-include="fragments/status-pill" ht-with='${ page.hero.pill } as label'></status-pill>
 
 <!-- `stat` is available throughout fragments/stat-item.html -->
@@ -41,5 +41,5 @@ Choose the directive that matches where the fragment consumes its input:
 
 ## Related references
 
-- Consult [ht-include.md](ht-include.md), [ht-each.md](ht-each.md), and [ht-apply.md](ht-apply.md) as needed for directive-specific syntax.
+- Consult [ht-include.md](ht-include.md), [ht-apply.md](ht-apply.md), [ht-with.md](ht-with.md), and [ht-each.md](ht-each.md) as needed for directive-specific syntax.
 - Consult the [template-data sources documentation](https://hypertemplates.net/docs/reference/core/data/#template-data-sources) only if this bundled reference does not answer the question.

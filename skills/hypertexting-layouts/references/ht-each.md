@@ -2,7 +2,12 @@
 
 ## Contract
 
-`ht-each` clones an element once for each value from an explicit [template-variable](variables.md) source. Arrays and slices produce one clone per item; a map, string, or scalar produces one clone.
+`ht-each` is the per-resolved-value variant of `ht-with`. Both directives bind
+values and make them available while processing the target and its descendants,
+including included fragments. `ht-each` binds and renders once per resolved
+value from an explicit [template-variable](variables.md) source. Arrays and
+slices produce one rendered element per item; a map, string, or scalar produces
+one rendered element; `nil` renders no element.
 
 ## Syntax
 
@@ -11,22 +16,23 @@
 ```
 
 - The expression is exactly `<binding> in ${ variable }`.
-- `each.index`, `each.count`, and `each.total` are available inside each clone.
+- `each.index`, `each.count`, and `each.total` are available for each rendered element.
 - `ht-offset` skips leading values; `ht-limit` caps the number of rendered values. Both take integer attribute values.
-- Repeat `ht-with='${ ... } as binding'` to make source-ordered local bindings. These resolve after the loop item and `each.*` metadata exist. Do not repeat `ht-each`, `ht-offset`, or `ht-limit` on one element.
+- Do not combine `ht-each` with `ht-with` on one element, and do not repeat `ht-each`, `ht-offset`, or `ht-limit`.
 
 ## Examples
 
 ```html
-<article ht-each='post in ${ page.posts }' ht-offset="1" ht-limit="3" ht-with='${ post.author } as author'>
-    <h2>${ post.title }</h2>
-    <p>${ author.name }</p>
+<article ht-each='post in ${ page.posts }' ht-offset="1" ht-limit="3">
+	<h2>${ post.title }</h2>
+	<p>${ post.author.name }</p>
 </article>
 ```
 
 ## Related references
 
-Consult [ht-with.md](ht-with.md) for binding syntax and the difference between `ht-each` clone scope and `ht-apply`'s shallow scope.
+Consult [ht-with.md](ht-with.md) for the single-pass variant, which binds and
+renders exactly once.
 
 ## Specification
 

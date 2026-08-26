@@ -4,37 +4,46 @@
 
 `ht-with` resolves a complete [template variable](variables.md) and gives it a local binding name. Its syntax is exactly `${ variable } as binding`.
 
-`ht-with` changes scope according to the directive it modifies:
-
-- On `ht-apply`, the binding is available only to the target element's attributes and direct text-node children.
-- On `ht-each`, the binding resolves after the loop item and `each.*` metadata, and is available throughout that iteration's clone, including an included fragment.
-- Without either directive, `ht-with` causes an implicit `ht-apply`, so it has `ht-apply`'s shallow scope.
+`ht-with` is the single-pass variant of `ht-each`. Both directives bind values
+and make them available while processing the target and its descendants,
+including included fragments. `ht-with` binds and renders exactly once: arrays,
+maps, scalars, and `nil` each bind as one value.
 
 Repeat `ht-with` attributes to create source-ordered bindings. Later bindings may use earlier bindings and may shadow outer values, including with `nil`. Bindings never escape their directive scope.
 
 ## Examples
 
-Use `ht-with` when the root element consumes the value:
+Use `ht-with` when one target and its descendants consume the value:
 
 ```html
-<status-pill
-  ht-include="fragments/status-pill"
-  ht-with='${ page.hero.pill } as label'>${ label }</status-pill>
+<a ht-with='${ page.hero.link } as link' href='${ link.href }'>
+  ${ link.label }
+  <span ht-if='${ link.external }'>↗️</span>
+</a>
 ```
 
-Use `ht-each` when the binding must be available throughout an included fragment:
+Use `ht-with` on an `ht-include` to align source data with the included fragment’s expected bindings:
 
 ```html
 <stat-item
-  ht-each='stat in ${ page.hero.stats }'
-  ht-include="fragments/stat-item"></stat-item>
+  ht-include='fragments/stat-item'
+  ht-with='${ data.stats.summary } as stat'></stat-item>
+```
+
+Use `ht-each` on an `ht-include` when the target must repeat for every item:
+
+```html
+<stat-item
+  ht-include='fragments/stat-item'
+  ht-each='stat in ${ data.stats.details }'></stat-item>
 ```
 
 ## Related references
 
-- Consult [ht-apply.md](ht-apply.md) for shallow rendering and root-only bindings.
-- Consult [ht-each.md](ht-each.md) for clone scope, loop metadata, and iteration syntax.
-- Consult [template-data.md](template-data.md) when choosing between a root-only binding and fragment-wide iteration.
+- `ht-with` implicitly applies template variables in its root's attributes and direct text-node children; it may also include an explicit `ht-apply`.
+- `ht-with` cannot be combined with `ht-each` on one element.
+- Consult [ht-each.md](ht-each.md) for the per-resolved-value variant, loop metadata, and iteration syntax.
+- Consult [template-data.md](template-data.md) when choosing between target-only application and scoped binding that traverses descendants.
 
 ## Specification
 

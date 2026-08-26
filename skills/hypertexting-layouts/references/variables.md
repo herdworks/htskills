@@ -13,7 +13,7 @@ A template variable is a complete `${ ... }` expression. Directives that require
 - Use keypaths to read template data, such as `${ page.title }`.
 - Separate fallback candidates with commas: `${ page.title, site.title, "Untitled" }`.
 - Unquoted arguments are keypaths; quoted strings, booleans, and finite numbers are literal values.
-- A template variable can resolve to its native value where a directive expects a value, or render as text where `ht-apply` processes it.
+- A template variable can resolve to its native value where a directive expects a value, or render as text where `ht-apply`, `ht-with`, or `ht-each` processes it.
 
 ## Examples
 

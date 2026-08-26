@@ -5,6 +5,17 @@ this file.
 
 ## Unreleased
 
+- **Breaking:** Reframed `ht-with` as the single-pass scoped-binding variant of
+  `ht-each`. `ht-with` binds and renders exactly once, while making its values
+  available as the target, descendants, and included fragments are processed;
+  `ht-each` binds and renders once per resolved value. `ht-apply` remains
+  target-only rendering and does not traverse descendants.
+- **Added:** Documented `site.feeds.<id>.metadata` overrides for Atom titles,
+  descriptions, authors, emails, and favicons, including inheritance from the
+  website values.
+- **Breaking:** Documented canonical Atom feed URLs ending in `.xml` instead
+  of `.atom.xml`, for both user feeds and automatic tag feeds.
+
 ## v0.8.0 (2026-08-18)
 
 - **Added:** A `compatibility` declaration to bundled skill frontmatter; the

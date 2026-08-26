@@ -3,7 +3,7 @@ name: hypertexting-layouts
 description: HyperTexting HTML templating skill.
 compatibility: Requires hyperctl.
 metadata:
-  version: "2026-08-18T19:07:00Z"
+  version: "2026-08-26T00:00:00Z"
 ---
 
 # HyperTexting layouts
@@ -31,8 +31,8 @@ Compose complete HTML documents from reusable fragments. Let the source design d
 
 ### Select directives
 
-- Use `ht-include` for fragments, `ht-if` for conditions, `ht-each` for iteration, `ht-apply` with template variables for content and attributes, and `ht-block` for composable regions.
-- Define the fragment's expected data before selecting `ht-with` or `ht-each`; consult [template-data.md](references/template-data.md) as needed.
+- Use `ht-include` for fragments, `ht-if` for conditions, `ht-apply` / `ht-with` / `ht-each` for attribute and content templating, and `ht-block` for content-addressable templating.
+- Use `ht-apply` to render variables in a target element's attributes and direct text nodes. Use `ht-with` or `ht-each` to bind values and make them available throughout the target and its descendants as they are processed. Define the fragment's expected data before selecting a directive; consult [template-data.md](references/template-data.md) as needed.
 - Use `ht-debug`, `ht-pipe`, `ht-attrs`, and `ht-base` only when the simpler directives cannot express the layout.
 - Do not reach for JavaScript components until the HTML model is exhausted.
 - Use `ht-apply` with template variables instead of legacy `ht-content`, `ht-attr`, `ht-attrs`, `ht-param`, and `ht-query` patterns.
@@ -63,7 +63,7 @@ Compose complete HTML documents from reusable fragments. Let the source design d
 
 - Consult [template-data.md](references/template-data.md) as needed when deciding what template data is visible or how a fragment receives it.
 - Consult [directives.md](references/directives.md), [variables.md](references/variables.md), or [expressions.md](references/expressions.md) as needed for directive terminology, template variables, and expression tokens.
-- Consult [ht-include.md](references/ht-include.md), [ht-if.md](references/ht-if.md), [ht-each.md](references/ht-each.md), [ht-apply.md](references/ht-apply.md), [ht-with.md](references/ht-with.md), or [ht-block.md](references/ht-block.md) as needed for the core layout directives.
+- Consult [ht-include.md](references/ht-include.md), [ht-if.md](references/ht-if.md), [ht-apply.md](references/ht-apply.md), [ht-with.md](references/ht-with.md), [ht-each.md](references/ht-each.md), or [ht-block.md](references/ht-block.md) as needed for the core layout directives.
 - Consult [ht-debug.md](references/ht-debug.md), [ht-attrs.md](references/ht-attrs.md), [ht-base.md](references/ht-base.md), or [ht-pipe.md](references/ht-pipe.md) as needed for specialized layout directives.
 - Consult `hyperctl agent skill describe hypertexting-html` as needed for semantic element, custom-element, attribute, and class decisions.
 - Consult the [templating](https://hypertemplates.net/docs/#introduction-to-templating), [layouts](https://hypertemplates.net/docs/reference/core/layouts/), [fragments](https://hypertemplates.net/docs/reference/core/fragments/), or [directives](https://hypertemplates.net/docs/reference/core/directives/) documentation only if the bundled references do not answer the question.

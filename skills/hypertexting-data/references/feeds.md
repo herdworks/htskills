@@ -23,6 +23,12 @@ An identifier must be non-empty, contain no slash, and must not equal the config
 ```yaml
 feeds:
   blog:
+    metadata:
+      title: Blog
+      description: Recent writing
+      author: Example Author
+      email: author@example.com
+      favicon: /favicon.png
     include:
       - path: blog/**
     exclude:
@@ -38,10 +44,11 @@ feeds:
   matching `exclude` rejects a page.
 - `sort` is an ordered list of rules. Each rule contains exactly one field whose direction is `asc` or `desc`.
 - `html_url` is the feed's HTML alternate URL. When omitted, the site URL is the alternate.
+- `metadata` overrides Atom feed identity. Its `title`, `description`, `author`, `email`, and `favicon` values inherit the corresponding site title, description, and byline values when omitted. The favicon is emitted on the Atom feed author.
 - A configured site feed must not duplicate an automatic tag feed;
   a feed that includes exactly one tag with no excludes, sort, or `html_url` is a validation error.
-- User-feed Atom files publish as `/feeds/<id>.atom.xml` by default.
-  Automatic tag feeds publish as `/feeds/tags/<tag>.atom.xml` and use `/tags/<tag>/` as their HTML alternate by default.
+- User-feed Atom files publish as `/feeds/<id>.xml` by default.
+  Automatic tag feeds publish as `/feeds/tags/<tag>.xml` and use `/tags/<tag>/` as their HTML alternate by default.
 - HyperTexting generates a tag landing page at `/tags/<tag>/` for each tag feed unless an authored page already occupies that path.
   Generated tag pages use `site.config.tag_layout` as their layout (default `default`).
   On an authored tag page, add a `tag` feed reference when its template needs the feed items;

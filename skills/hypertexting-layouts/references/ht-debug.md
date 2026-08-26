@@ -4,7 +4,7 @@
 
 `ht-debug` writes diagnostic information during rendering and removes itself from the rendered HTML. Give each `ht-debug` attribute exactly one value: `element` or one complete `${ ... }` template variable. Repeat the attribute to inspect more than one target on an element.
 
-`ht-debug` runs before `ht-apply`. It can therefore report an `ht-with` binding as `null` even when that binding renders successfully in the root element's attributes or direct text. Treat its output as a view of the data available at the debug stage, then validate the rendered HTML as well.
+Within an `ht-each` or `ht-with` scope, `ht-debug` can inspect the local bindings. Treat its output as a view of the data available at its directive stage, then validate the rendered HTML as well.
 
 ## Examples
 
@@ -15,7 +15,7 @@
   ht-debug='${ label }'>${ label }</status-pill>
 ```
 
-The debug output can show `${ label }` as `null`, while the root element's direct text renders the value. Use `ht-debug="element"` to inspect the authored element, or debug a value that exists in the enclosing template data.
+The debug output includes the resolved `${ label }` value. Use `ht-debug="element"` to inspect the element at the debug stage.
 
 ## Syntax
 
