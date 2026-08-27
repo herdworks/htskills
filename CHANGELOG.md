@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## 0.9.1 (2026-08-27)
+
 - **Added:** Documented `${ markdown(...) }` inline/block behavior and new
   options object.
 
