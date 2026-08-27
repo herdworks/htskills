@@ -5,6 +5,9 @@ this file.
 
 ## Unreleased
 
+- **Added:** Documented `${ markdown(...) }` inline/block behavior and new
+  options object.
+
 ## v0.9.0 (2026-08-26)
 
 - **Breaking:** Reframed `ht-with` as the single-pass scoped-binding variant of
