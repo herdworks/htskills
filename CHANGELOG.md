@@ -5,6 +5,8 @@ this file.
 
 ## Unreleased
 
+## v0.10.0 (2026-10-01)
+
 - **Breaking:** Consolidated the focused `hypertexting-*` skills into one
   `hypertexting` skill with topical reference files. Its replacement metadata
   lets `up` remove the superseded installed skills.
@@ -14,7 +16,7 @@ this file.
 - **Added:** `up --force` replaces project-local bundled skills regardless of
   their installed versions.
 
-## 0.9.1 (2026-08-27)
+## v0.9.1 (2026-08-27)
 
 - **Added:** Documented `${ markdown(...) }` inline/block behavior and new
   options object.
