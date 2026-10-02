@@ -14,10 +14,9 @@ var CLI = clic.CLI{Command: SkillCommand()}
 func SkillCommand() clic.Command {
 	return clic.Command{
 		Meta: clic.CommandMeta{
-			Name:        "htskills",
 			Description: "Read, install, update, and synchronize bundled portable Agent Skills.",
 			Usage: []string{
-				"htskills [command]",
+				"{{ .Command }} [command]",
 			},
 		},
 		Spec: clic.CommandSpec{

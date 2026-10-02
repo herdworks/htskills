@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"path"
 	"strings"
+	"text/template"
 
 	"gopkg.in/yaml.v3"
 )
@@ -176,4 +177,40 @@ func Read(name string) ([]byte, error) {
 		}
 	}
 	return nil, fmt.Errorf("unknown skill %q", name)
+}
+
+// ParseTemplate parses templatable bundled content with the common strict policy.
+func ParseTemplate(name string, content []byte) (*template.Template, error) {
+	return template.New(name).Option("missingkey=error").Parse(string(content))
+}
+
+// RenderSkill returns a bundled SKILL.md rendered with template data.
+func RenderSkill(name string, data any) ([]byte, error) {
+	return RenderSkillFile(name, "SKILL.md", data)
+}
+
+// RenderSkillFile returns a templated bundled skill file rendered with template data.
+func RenderSkillFile(name, filename string, data any) ([]byte, error) {
+	if filename != "SKILL.md" && (!strings.HasPrefix(filename, "references/") || !fs.ValidPath(filename)) {
+		return nil, fmt.Errorf("invalid bundled skill file %q", filename)
+	}
+	content, err := Read(name)
+	if err != nil {
+		return nil, err
+	}
+	if filename != "SKILL.md" {
+		content, err = FS.ReadFile(path.Join(Root, name, filename))
+		if err != nil {
+			return nil, fmt.Errorf("read bundled skill %q file %q: %w", name, filename, err)
+		}
+	}
+	template, err := ParseTemplate(path.Join(name, filename), content)
+	if err != nil {
+		return nil, fmt.Errorf("parse bundled skill %q file %q template: %w", name, filename, err)
+	}
+	var rendered bytes.Buffer
+	if err = template.Execute(&rendered, data); err != nil {
+		return nil, fmt.Errorf("render bundled skill %q file %q template: %w", name, filename, err)
+	}
+	return rendered.Bytes(), nil
 }

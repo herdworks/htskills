@@ -12,7 +12,7 @@ func SkillDescribeCommand() clic.Command {
 	return clic.Command{
 		Meta: clic.CommandMeta{
 			Name:        "describe",
-			Description: "Write the raw embedded SKILL.md bytes.",
+			Description: "Show one SKILL.md file.",
 			Usage: []string{
 				"{{ .Command }} describe <name>",
 			},
@@ -23,7 +23,7 @@ func SkillDescribeCommand() clic.Command {
 			Help:      clic.DefaultHelp,
 			Validator: expectedPositionalArguments(1),
 			Handler: func(execution *clic.Execution) error {
-				content, err := htskills.Read(execution.Command.State.Arguments[0])
+				content, err := htskills.RenderSkill(execution.Command.State.Arguments[0], map[string]string{"Command": commandPrefix(execution)})
 				if err != nil {
 					return err
 				}

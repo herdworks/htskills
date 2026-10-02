@@ -4,6 +4,8 @@ package readme
 import (
 	_ "embed"
 	"text/template"
+
+	"github.com/herdworks/htskills"
 )
 
 // content is the source for the templatable onboarding README.
@@ -13,5 +15,5 @@ var content string
 
 // README returns a fresh parsed onboarding README template.
 func README() (*template.Template, error) {
-	return template.New("README.md").Option("missingkey=error").Parse(content)
+	return htskills.ParseTemplate("README.md", []byte(content))
 }

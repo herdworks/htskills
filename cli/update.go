@@ -25,7 +25,7 @@ func SkillUpdateCommand() clic.Command {
 			Help:      clic.DefaultHelp,
 			Validator: expectedPositionalArguments(2),
 			Handler: func(execution *clic.Execution) error {
-				written, err := updateSkill(execution.Command.State.Arguments[0], execution.Command.State.Arguments[1])
+				written, err := updateSkill(execution.Command.State.Arguments[0], execution.Command.State.Arguments[1], commandPrefix(execution))
 				if err != nil {
 					return err
 				}
@@ -35,7 +35,11 @@ func SkillUpdateCommand() clic.Command {
 	}
 }
 
-func updateSkill(name, destination string) ([]string, error) {
+func updateSkill(name, destination, command string) ([]string, error) {
+	return updateSkillWithForce(name, destination, command, false)
+}
+
+func updateSkillWithForce(name, destination, command string, force bool) ([]string, error) {
 	if _, err := htskills.Read(name); err != nil {
 		return nil, err
 	}
@@ -71,11 +75,14 @@ func updateSkill(name, destination string) ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("bundled skill %q: %w", name, err)
 	}
-	if installedMetadata.Metadata.Version == embeddedMetadata.Metadata.Version {
+	if !force && installedMetadata.Metadata.Version == embeddedMetadata.Metadata.Version {
 		return nil, nil
 	}
-	if installedMetadata.Metadata.Version > embeddedMetadata.Metadata.Version {
+	if !force && installedMetadata.Metadata.Version > embeddedMetadata.Metadata.Version {
 		return nil, fmt.Errorf("skill %q has newer installed version %s (bundled version %s)", name, installedMetadata.Metadata.Version, embeddedMetadata.Metadata.Version)
 	}
-	return copyEmbeddedSkill(name, destination)
+	if err = os.RemoveAll(filepath.Join(destination, "references")); err != nil {
+		return nil, fmt.Errorf("remove installed skill references: %w", err)
+	}
+	return copyEmbeddedSkill(name, destination, command)
 }

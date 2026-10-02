@@ -1,6 +1,7 @@
 package htskills
 
 import (
+	"path"
 	"strings"
 	"testing"
 )
@@ -11,16 +12,7 @@ func TestCatalogExposesBundledFrontmatter(t *testing.T) {
 		t.Fatal(err)
 	}
 	want := map[string]string{
-		"hypertexting":            "HyperTexting website orchestration skill.",
-		"hypertexting-assets":     "HyperTexting asset management skill.",
-		"hypertexting-css":        "General CSS authoring guidelines.",
-		"hypertexting-data":       "HyperTexting data management skill.",
-		"hypertexting-debugging":  "HyperTexting debugging skill.",
-		"hypertexting-html":       "General HTML authoring guidelines.",
-		"hypertexting-javascript": "General JavaScript authoring guidelines.",
-		"hypertexting-layouts":    "HyperTexting HTML templating skill.",
-		"hypertexting-plugins":    "HyperTexting plugins skill.",
-		"hypertexting-themes":     "HyperTexting theme management skill.",
+		"hypertexting": "Build, organize, validate, or debug HyperTexting websites and themes. Use for HyperTexting data, assets, layouts, HTML, CSS, browser JavaScript, build-time plugins, themes, and rendered-output troubleshooting.",
 	}
 	if len(skills) != len(want) {
 		t.Fatalf("Catalog returned %d skills, want %d", len(skills), len(want))
@@ -42,6 +34,41 @@ func TestCatalogExposesBundledFrontmatter(t *testing.T) {
 		if !strings.HasPrefix(string(content), "---\nname: "+skill.Name+"\n") {
 			t.Fatalf("Read(%q) returned invalid frontmatter", skill.Name)
 		}
+	}
+}
+
+func TestRenderSkillUsesTemplateData(t *testing.T) {
+	raw, err := Read("hypertexting")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(raw), "{{ .Command }} up") {
+		t.Fatalf("raw skill does not contain command template: %q", raw)
+	}
+	rendered, err := RenderSkill("hypertexting", map[string]string{"Command": "htskills"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(rendered), "`htskills up`") {
+		t.Fatalf("rendered skill does not contain command: %q", rendered)
+	}
+	if strings.Contains(string(rendered), "{{ .Command }}") {
+		t.Fatalf("rendered skill retains command template: %q", rendered)
+	}
+}
+
+func TestRenderSkillFileReadsReference(t *testing.T) {
+	filename := "references/layouts.md"
+	raw, err := FS.ReadFile(path.Join(Root, "hypertexting", filename))
+	if err != nil {
+		t.Fatal(err)
+	}
+	rendered, err := RenderSkillFile("hypertexting", filename, map[string]string{"Command": "htskills"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if string(rendered) != string(raw) {
+		t.Fatalf("rendered reference differs without template actions")
 	}
 }
 

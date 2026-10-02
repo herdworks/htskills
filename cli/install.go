@@ -28,7 +28,7 @@ func SkillInstallCommand() clic.Command {
 			Help:      clic.DefaultHelp,
 			Validator: expectedPositionalArguments(2),
 			Handler: func(execution *clic.Execution) error {
-				written, err := installSkill(execution.Command.State.Arguments[0], execution.Command.State.Arguments[1])
+				written, err := installSkill(execution.Command.State.Arguments[0], execution.Command.State.Arguments[1], commandPrefix(execution))
 				if err != nil {
 					return err
 				}
@@ -47,7 +47,7 @@ func writePaths(execution *clic.Execution, paths []string) error {
 	return nil
 }
 
-func installSkill(name, destination string) ([]string, error) {
+func installSkill(name, destination, command string) ([]string, error) {
 	if _, err := htskills.Read(name); err != nil {
 		return nil, err
 	}
@@ -59,10 +59,10 @@ func installSkill(name, destination string) ([]string, error) {
 	if err := os.Mkdir(destination, 0755); err != nil {
 		return nil, err
 	}
-	return copyEmbeddedSkill(name, destination)
+	return copyEmbeddedSkill(name, destination, command)
 }
 
-func copyEmbeddedSkill(name, destination string) ([]string, error) {
+func copyEmbeddedSkill(name, destination, command string) ([]string, error) {
 	root := htskills.Root + "/" + name
 	written := []string{}
 	err := fs.WalkDir(htskills.FS, root, func(path string, entry fs.DirEntry, err error) error {
@@ -80,6 +80,13 @@ func copyEmbeddedSkill(name, destination string) ([]string, error) {
 		content, err := htskills.FS.ReadFile(path)
 		if err != nil {
 			return err
+		}
+		filename := strings.TrimPrefix(relative, "/")
+		if filename == "SKILL.md" || strings.HasPrefix(filename, "references/") {
+			content, err = htskills.RenderSkillFile(name, filename, map[string]string{"Command": command})
+			if err != nil {
+				return err
+			}
 		}
 		if err = os.WriteFile(output, content, 0644); err != nil {
 			return err

@@ -59,7 +59,7 @@ func TestSkillUpRequiresSkillsDirectory(t *testing.T) {
 
 func TestSkillUpSynchronizesSkillsAndReportsResults(t *testing.T) {
 	directory := t.TempDir()
-	name := "hypertexting-assets"
+	name := "hypertexting"
 	content, err := htskills.Read(name)
 	if err != nil {
 		t.Fatal(err)
@@ -74,6 +74,13 @@ func TestSkillUpSynchronizesSkillsAndReportsResults(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err = os.WriteFile(installedPath, []byte(installed), 0644); err != nil {
+		t.Fatal(err)
+	}
+	staleReference := filepath.Join(directory, name, "references", "stale.md")
+	if err = os.MkdirAll(filepath.Dir(staleReference), 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(staleReference, []byte("stale"), 0644); err != nil {
 		t.Fatal(err)
 	}
 
@@ -92,13 +99,40 @@ func TestSkillUpSynchronizesSkillsAndReportsResults(t *testing.T) {
 		if err != nil {
 			t.Fatalf("read installed %s: %v", skill.Name, err)
 		}
-		embedded, err := htskills.Read(skill.Name)
+		embedded, err := htskills.RenderSkill(skill.Name, map[string]string{"Command": "htskills"})
 		if err != nil {
 			t.Fatal(err)
 		}
 		if string(installed) != string(embedded) {
 			t.Fatalf("installed %s differs from bundle", skill.Name)
 		}
+	}
+	if _, err = os.Stat(staleReference); !os.IsNotExist(err) {
+		t.Fatalf("stale reference remains after update: %v", err)
+	}
+	reference, err := os.ReadFile(filepath.Join(directory, name, "references", "layouts.md"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	expectedReference, err := htskills.RenderSkillFile(name, "references/layouts.md", map[string]string{"Command": "htskills"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if string(reference) != string(expectedReference) {
+		t.Fatal("installed reference differs from rendered bundle")
+	}
+}
+
+func TestSkillDescribeRendersCommandPrefix(t *testing.T) {
+	output, result := runCLI("describe", "hypertexting")
+	if result.Error != nil {
+		t.Fatalf("htskills describe = %#v", result)
+	}
+	if !strings.Contains(output.String(), "`htskills up`") {
+		t.Fatalf("htskills describe does not render command: %q", output.String())
+	}
+	if strings.Contains(output.String(), "{{ .Command }}") {
+		t.Fatalf("htskills describe retains template: %q", output.String())
 	}
 }
 
@@ -120,9 +154,45 @@ func TestSkillUpReportsCurrentSkills(t *testing.T) {
 	}
 }
 
+func TestSkillUpReplacesLegacySkills(t *testing.T) {
+	directory := t.TempDir()
+	content, err := htskills.Read("hypertexting")
+	if err != nil {
+		t.Fatal(err)
+	}
+	skill, err := htskills.Parse(content)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, name := range skill.ReplacementAliases() {
+		path := filepath.Join(directory, name, "SKILL.md")
+		legacy := "---\nname: " + name + "\ndescription: Legacy skill.\ncompatibility: Requires hyperctl.\n---\n# Legacy\n"
+		if err = os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			t.Fatal(err)
+		}
+		if err = os.WriteFile(path, []byte(legacy), 0644); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	output, result := runCLIAt(filepath.Dir(directory), "", "up", directory)
+	if result.Error != nil {
+		t.Fatalf("htskills up = %#v", result)
+	}
+	for _, name := range skill.ReplacementAliases() {
+		path := filepath.Join(directory, name, "SKILL.md")
+		if _, err = os.Stat(path); !os.IsNotExist(err) {
+			t.Fatalf("legacy skill %q remains: %v", name, err)
+		}
+		if !strings.Contains(output.String(), `skill "`+path+`" removed`) {
+			t.Fatalf("htskills up does not report removed skill %q: %q", name, output.String())
+		}
+	}
+}
+
 func TestSkillUpUpdatesUnversionedSkill(t *testing.T) {
 	directory := t.TempDir()
-	name := "hypertexting-assets"
+	name := "hypertexting"
 	content, err := htskills.Read(name)
 	if err != nil {
 		t.Fatal(err)
@@ -131,7 +201,7 @@ func TestSkillUpUpdatesUnversionedSkill(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	unversioned := strings.Replace(string(content), "metadata:\n  version: \""+metadata.Metadata.Version+"\"\n", "", 1)
+	unversioned := strings.Replace(string(content), "  version: \""+metadata.Metadata.Version+"\"\n", "", 1)
 	installedPath := filepath.Join(directory, name, "SKILL.md")
 	if err = os.MkdirAll(filepath.Dir(installedPath), 0755); err != nil {
 		t.Fatal(err)
@@ -151,7 +221,7 @@ func TestSkillUpUpdatesUnversionedSkill(t *testing.T) {
 
 func TestSkillUpFailsWithoutWritingOutput(t *testing.T) {
 	directory := t.TempDir()
-	name := "hypertexting-assets"
+	name := "hypertexting"
 	content, err := htskills.Read(name)
 	if err != nil {
 		t.Fatal(err)
@@ -181,13 +251,53 @@ func TestSkillUpFailsWithoutWritingOutput(t *testing.T) {
 	}
 }
 
-func TestSkillUpdateIsIdempotentForEqualVersions(t *testing.T) {
-	name := "hypertexting-assets"
-	destination := filepath.Join(t.TempDir(), name)
-	if _, err := installSkill(name, destination); err != nil {
+func TestSkillUpForceReplacesNewerInstalledSkill(t *testing.T) {
+	directory := t.TempDir()
+	name := "hypertexting"
+	content, err := htskills.Read(name)
+	if err != nil {
 		t.Fatal(err)
 	}
-	written, err := updateSkill(name, destination)
+	metadata, err := htskills.Parse(content)
+	if err != nil {
+		t.Fatal(err)
+	}
+	newer := strings.Replace(string(content), `version: "`+metadata.Metadata.Version+`"`, `version: "9999-01"`, 1)
+	path := filepath.Join(directory, name, "SKILL.md")
+	if err = os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err = os.WriteFile(path, []byte(newer), 0644); err != nil {
+		t.Fatal(err)
+	}
+
+	output, result := runCLIAt(filepath.Dir(directory), "", "up", "--force", directory)
+	if result.Error != nil {
+		t.Fatalf("htskills up --force = %#v", result)
+	}
+	if !strings.Contains(output.String(), `skill "`+path+`" updated to "`+metadata.Metadata.Version+`"`) {
+		t.Fatalf("htskills up --force does not report updated skill: %q", output.String())
+	}
+	installed, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	embedded, err := htskills.RenderSkill(name, map[string]string{"Command": "htskills"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if string(installed) != string(embedded) {
+		t.Fatal("htskills up --force did not replace the newer installed skill")
+	}
+}
+
+func TestSkillUpdateIsIdempotentForEqualVersions(t *testing.T) {
+	name := "hypertexting"
+	destination := filepath.Join(t.TempDir(), name)
+	if _, err := installSkill(name, destination, "htskills"); err != nil {
+		t.Fatal(err)
+	}
+	written, err := updateSkill(name, destination, "htskills")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -302,15 +412,15 @@ func TestSkillUpRejectsGlobalDirectoriesAndInstalledGlobalSkills(t *testing.T) {
 func TestInstallAndUpdateAcceptGlobalSkillPaths(t *testing.T) {
 	workspace := t.TempDir()
 	home := t.TempDir()
-	destination := filepath.Join(home, ".claude", "skills", "hypertexting-assets")
+	destination := filepath.Join(home, ".claude", "skills", "hypertexting")
 	if err := os.MkdirAll(filepath.Dir(destination), 0755); err != nil {
 		t.Fatal(err)
 	}
-	_, result := runCLIAt(workspace, home, "install", "hypertexting-assets", destination)
+	_, result := runCLIAt(workspace, home, "install", "hypertexting", destination)
 	if result.Error != nil {
 		t.Fatalf("htskills install global path = %#v", result)
 	}
-	content, err := htskills.Read("hypertexting-assets")
+	content, err := htskills.Read("hypertexting")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -322,7 +432,7 @@ func TestInstallAndUpdateAcceptGlobalSkillPaths(t *testing.T) {
 	if err = os.WriteFile(filepath.Join(destination, "SKILL.md"), []byte(older), 0644); err != nil {
 		t.Fatal(err)
 	}
-	_, result = runCLIAt(workspace, home, "update", "hypertexting-assets", destination)
+	_, result = runCLIAt(workspace, home, "update", "hypertexting", destination)
 	if result.Error != nil {
 		t.Fatalf("htskills update global path = %#v", result)
 	}

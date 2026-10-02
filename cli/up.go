@@ -18,20 +18,30 @@ func SkillUpCommand() clic.Command {
 			Name:        "up",
 			Description: "Install and update bundled HyperTexting skills.",
 			Usage: []string{
-				"{{ .Command }} up [skills-directory]",
+				"{{ .Command }} up [--force] [skills-directory]",
 			},
 			Order: 6,
 		},
 		Spec: clic.CommandSpec{
-			Key:       "up",
-			Help:      clic.DefaultHelp,
+			Key:  "up",
+			Help: clic.DefaultHelp,
+			Options: clic.Options{
+				"force": {
+					Meta: clic.OptionMeta{
+						Name:        "force",
+						Description: "Replace installed skills regardless of their versions.",
+					},
+					Spec: clic.OptionSpec{Key: "force", Kind: clic.BoolOption},
+				},
+			},
 			Validator: skillUpArguments,
 			Handler: func(execution *clic.Execution) error {
 				var destination string
 				if execution.Command.PositionalArguments() == 1 {
 					destination = execution.Command.State.Arguments[0]
 				}
-				results, err := upSkills(execution.WorkingDirectory, execution.LookupEnv, execution.CommandPathString(), destination)
+				force := execution.Options.BoolValue("force")
+				results, err := upSkills(execution.WorkingDirectory, execution.LookupEnv, execution.CommandPathString(), commandPrefix(execution), destination, force)
 				if err != nil {
 					return err
 				}
@@ -53,14 +63,14 @@ func skillUpArguments(execution *clic.Execution) error {
 	return err
 }
 
-func upSkills(workspace string, lookupEnv func(string) (string, bool), commandPath, destination string) ([]skillUpResult, error) {
+func upSkills(workspace string, lookupEnv func(string) (string, bool), commandPath, command, destination string, force bool) ([]skillUpResult, error) {
 	roots, err := skillUpRoots(workspace, lookupEnv, commandPath, destination)
 	if err != nil {
 		return nil, err
 	}
 	var results []skillUpResult
 	for _, root := range roots {
-		synced, err := syncSkills(root)
+		synced, err := syncSkills(root, command, force)
 		if err != nil {
 			return nil, err
 		}
@@ -98,7 +108,7 @@ func skillUpRoots(workspace string, lookupEnv func(string) (string, bool), comma
 	return roots, nil
 }
 
-func syncSkills(destination string) ([]skillUpResult, error) {
+func syncSkills(destination, command string, force bool) ([]skillUpResult, error) {
 	info, err := os.Stat(destination)
 	if err != nil {
 		if !os.IsNotExist(err) {
@@ -116,7 +126,7 @@ func syncSkills(destination string) ([]skillUpResult, error) {
 	}
 	results := []skillUpResult{{Action: skillUpDiscovered, Path: destination}}
 	for _, skill := range skills {
-		synced, err := syncSkill(destination, skill)
+		synced, err := syncSkill(destination, skill, command, force)
 		if err != nil {
 			return nil, err
 		}
@@ -181,7 +191,7 @@ func writeSkillUpResults(output io.Writer, results []skillUpResult) error {
 	return nil
 }
 
-func syncSkill(destination string, skill htskills.Skill) ([]skillUpResult, error) {
+func syncSkill(destination string, skill htskills.Skill, command string, force bool) ([]skillUpResult, error) {
 	content, err := htskills.Read(skill.Name)
 	if err != nil {
 		return nil, err
@@ -193,13 +203,13 @@ func syncSkill(destination string, skill htskills.Skill) ([]skillUpResult, error
 	path := filepath.Join(destination, skill.Name)
 	result := skillUpResult{Path: filepath.Join(path, "SKILL.md"), Version: embedded.Metadata.Version}
 	if _, err = os.Lstat(path); os.IsNotExist(err) {
-		if _, err = installSkill(skill.Name, path); err != nil {
+		if _, err = installSkill(skill.Name, path, command); err != nil {
 			return nil, fmt.Errorf("install %q: %w", skill.Name, err)
 		}
 		result.Action = skillUpInstalled
 	} else if err != nil {
 		return nil, err
-	} else if written, err := updateSkill(skill.Name, path); err != nil {
+	} else if written, err := updateSkillWithForce(skill.Name, path, command, force); err != nil {
 		return nil, fmt.Errorf("update %q: %w", skill.Name, err)
 	} else if len(written) == 0 {
 		result.Action = skillUpCurrent
