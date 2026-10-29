@@ -18,7 +18,7 @@ func SkillUpCommand() clic.Command {
 			Name:        "up",
 			Description: "Install and update bundled HyperTexting skills.",
 			Usage: []string{
-				"{{ .Command }} up [--force] [skills-directory]",
+				"{{ .Command }} [--force] [skills-directory]",
 			},
 			Order: 6,
 		},

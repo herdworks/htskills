@@ -14,7 +14,7 @@ func SkillDescribeCommand() clic.Command {
 			Name:        "describe",
 			Description: "Show one SKILL.md file.",
 			Usage: []string{
-				"{{ .Command }} describe <name>",
+				"{{ .Command }} <name>",
 			},
 			Order: 3,
 		},

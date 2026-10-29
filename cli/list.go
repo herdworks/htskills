@@ -12,7 +12,7 @@ func SkillListCommand() clic.Command {
 			Name:        "ls",
 			Description: "List bundled offline skills.",
 			Usage: []string{
-				"{{ .Command }} ls",
+				"{{ .Command }}",
 			},
 			Order: 2,
 		},

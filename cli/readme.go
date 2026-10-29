@@ -13,7 +13,7 @@ func ReadmeCommand() clic.Command {
 			Name:        "readme",
 			Description: "Show onboarding context for a new agent.",
 			Usage: []string{
-				"{{ .Command }} readme",
+				"{{ .Command }}",
 			},
 			Order: 1,
 		},
