@@ -5,6 +5,10 @@ this file.
 
 ## Unreleased
 
+- **Fixed:** Removed repeated subcommand names from `readme`, `ls`, `describe`,
+  `install`, `update`, and `up` help usage, both standalone and when mounted
+  under `hyperctl skill`.
+
 ## v0.10.0 (2026-10-01)
 
 - **Breaking:** Consolidated the focused `hypertexting-*` skills into one

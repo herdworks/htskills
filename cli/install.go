@@ -19,7 +19,7 @@ func SkillInstallCommand() clic.Command {
 			Name:        "install",
 			Description: "Copy a complete skill directory to a new destination.",
 			Usage: []string{
-				"{{ .Command }} install <name> <path>",
+				"{{ .Command }} <name> <path>",
 			},
 			Order: 4,
 		},

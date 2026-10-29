@@ -16,7 +16,7 @@ func SkillUpdateCommand() clic.Command {
 			Name:        "update",
 			Description: "Update an installed skill when the bundled version is newer.",
 			Usage: []string{
-				"{{ .Command }} update <name> <path>",
+				"{{ .Command }} <name> <path>",
 			},
 			Order: 5,
 		},
